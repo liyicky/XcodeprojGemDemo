@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "XcodeprojGemDemo" do
+describe "AO_Xcodeproj" do
 
   before do
     include Spec_helper

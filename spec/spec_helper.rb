@@ -3,7 +3,8 @@ require 'debugger'
 require 'fileutils'
 require 'find'
 
-require File.expand_path(File.join('..', 'AO_Xcodeproj', 'lib', 'ao_xcodeproj.rb'))
+require '../AO_Xcodeproj/lib/ao_xcodeproj.rb'
+require '../AO_Xcodeproj/lib/ao_xcodeproj/ao_scheme.rb'
 
 module Spec_helper
 

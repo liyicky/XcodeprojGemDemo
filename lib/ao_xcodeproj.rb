@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require 'ao_xcodeproj/ao_scheme.rb'
 require 'xcodeproj'
 require 'debugger'
 
@@ -71,55 +72,14 @@ class XcodeTestProj
     @coverage_scheme.add_build_target(@main_target)
     @coverage_scheme.add_build_target(@test_target)
 
-    # Configures the Scheme's TestAction ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
-    test_action = @coverage_scheme.doc.root.elements['TestAction']
-    test_action.attributes['buildConfiguration'] = 'Coverage'
-
-    # Post Actions (Adds the Script)
-    ta_post_action = test_action.add_element("PostActions")
-    ta_execute_action = ta_post_action.add_element("ExecutionAction")
-    ta_execute_action.attributes["ActionType"] = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction"
-    ta_action_content = ta_execute_action.add_element("ActionContent")
-    ta_action_content.attributes["title"] = "Run Script"
-    ta_action_content.attributes["scriptText"] = @coverage_script
-    ta_env_buildable = ta_action_content.add_element("EnvironmentBuildable")
-    ta_buildable_ref = ta_env_buildable.add_element("BuildableReference")
-    ta_buildable_ref.attributes["BuildableIdentifier"] = "primary"
-    ta_buildable_ref.attributes["BlueprintIdentifier"] = @main_target.uuid
-    ta_buildable_ref.attributes["BuildableName"]       = "#{@main_target.name}.app"
-    ta_buildable_ref.attributes["BlueprintName"]       = "#{@main_target.name}"
-    ta_buildable_ref.attributes["ReferencedContainer"]  = "container:#{@main_target.project.path.basename}"
-
-    # Testables (Adds the Test Target)
-    ta_testables = test_action.elements['Testables']
-    ta_testable_reference = ta_testables.add_element('TestableReference')
-    ta_testable_reference.attributes['skipped'] = 'NO'
-    ta_testable_buildable_ref = ta_testable_reference.add_element('BuildableReference')
-    ta_testable_buildable_ref.attributes["BuildableIdentifier"] = "primary"
-    ta_testable_buildable_ref.attributes["BlueprintIdentifier"] = @test_target.uuid
-    ta_testable_buildable_ref.attributes["BuildableName"]       = "#{@test_target.name}.xctest"
-    ta_testable_buildable_ref.attributes["BlueprintName"]       = "#{@test_target.name}"
-    ta_testable_buildable_ref.attributes["ReferencedContainer"]  = "container:#{@test_target.project.path.basename}"
-
-    
-    ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
-
-
-    # Configures the Scheme's ProfileAction ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ##
-    profile_action = @coverage_scheme.doc.root.elements['ProfileAction']
-    pa_build_prod_runnable = profile_action.add_element('BuildableProductRunnable')
-    pa_buildable_ref = pa_build_prod_runnable.add_element('BuildableReference')
-    pa_buildable_ref.attributes['BuildableIdentifier'] = 'primary'
-    pa_buildable_ref.attributes['BlueprintIdentifier'] = @main_target.uuid
-    pa_buildable_ref.attributes['BuildableName']       = "#{@main_target.name}.app"
-    pa_buildable_ref.attributes['BlueprintName']       = @main_target.name
-    pa_buildable_ref.attributes['ReferenceContainer']  = "container:#{@main_target.project.path.basename}"
-    ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## ## 
+    buildCoverage = AO_scheme.new(@coverage_scheme, @main_target, @test_target, :debug)
+    buildCoverage.test_action(@coverage_script, "Coverage")
+    buildCoverage.profile_action
 
     @project.add_build_configuration("Coverage", :debug)
     @project.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"] = ["YES"]
     @project.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"] = ["YES"]
-    @coverage_scheme.save_as(@project_path, "Coverage", false)
+    buildCoverage.save(@project_path, "Coverage")
   end
 
   def addCoverageScript
