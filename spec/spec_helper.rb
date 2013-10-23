@@ -8,7 +8,7 @@ require '../AO_Xcodeproj/lib/ao_xcodeproj/ao_scheme.rb'
 
 module Spec_helper
 
-  def self.find_helper(file_path, query)
+  def self.find_file_helper(file_path, query)
     results = []
     Find.find(file_path) do |path|
       results << path
@@ -21,6 +21,4 @@ module Spec_helper
       end
     end
   end
-
-
 end

@@ -29,7 +29,7 @@ describe "AO_Xcodeproj" do
     it "creates Versioning.xcscheme files" do
       @project.addVersioningScheme
 
-      @result = Spec_helper::find_helper(@project_path, "/Versioning.xcscheme")
+      @result = Spec_helper::find_file_helper(@project_path, "/Versioning.xcscheme")
       versioning_exists = File.exist?(@result)
       versioning_exists.should == true
     end
@@ -44,7 +44,7 @@ describe "AO_Xcodeproj" do
     it "creates Coverage.xcscheme files" do
       @project.addCoverageScheme
 
-      @result = Spec_helper::find_helper(@project_path, "/Coverage.xcscheme")
+      @result = Spec_helper::find_file_helper(@project_path, "/Coverage.xcscheme")
       coverage_exists = File.exists?(@result)
       coverage_exists.should == true
     end
@@ -88,7 +88,7 @@ describe "AO_Xcodeproj" do
     it "should have a bin in the projects root directory" do
       @project.addCoverageScript
 
-      @result = Spec_helper::find_helper(@root_path, "/bin")
+      @result = Spec_helper::find_file_helper(@root_path, "/bin")
       bin_exists = File.exists?(@result)
       bin_exists.should == true
     end
@@ -96,7 +96,7 @@ describe "AO_Xcodeproj" do
     it "should have coverage.sh in the project's bin" do 
       @project.addCoverageScript
 
-      @result = Spec_helper::find_helper(@root_path, "coverage.sh")
+      @result = Spec_helper::find_file_helper(@root_path, "coverage.sh")
       script_exists = File.exists?(@result)
       script_exists.should == true
     end
