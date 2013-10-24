@@ -69,8 +69,9 @@ class XcodeTestProj
     @coverage_scheme = Xcodeproj::XCScheme.new
 
     buildCoverage = AO_scheme.new(@coverage_scheme, @main_target, @test_target)
+    buildCoverage.add_target
     buildCoverage.test_action(@coverage_script, "Coverage")
-    buildCoverage.profile_action
+    # buildCoverage.profile_action
 
     buildCoverage.save(@project_path, "Coverage")
 

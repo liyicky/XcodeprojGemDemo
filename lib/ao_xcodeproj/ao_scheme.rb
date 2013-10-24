@@ -11,6 +11,41 @@ class AO_scheme
     # @scheme.add_build_target(@test_target)
   end
 
+  def add_target(target=@main_target)
+
+    build_action = @scheme.doc.root.elements['BuildAction']
+    build_action_entries = build_action.add_element("BuildActionEntries")
+
+    build_action_entry = build_action_entries.add_element('BuildActionEntry')
+    build_action_entry.attributes['buildForTesting']      = 'YES'
+    build_action_entry.attributes['buildForRunning']      = 'YES'
+    build_action_entry.attributes['buildForProfiling']    = 'YES'
+    build_action_entry.attributes['buildForArchiving']    = 'YES'
+    build_action_entry.attributes['buildForAnalyzing']    = 'YES'
+
+    buildable_reference = build_action_entry.add_element 'BuildableReference'
+    buildable_reference.attributes['BuildableIdentifier'] = 'primary'
+    buildable_reference.attributes['BlueprintIdentifier'] = target.uuid
+    buildable_reference.attributes['BuildableName']       = "#{target}.app"
+    buildable_reference.attributes['BlueprintName']       = target.name
+    buildable_reference.attributes['ReferencedContainer'] = "container:#{target.project.path.basename}"
+
+  end
+
+  def buildable_reference(element, type, macro_exp=false)
+    type = ("#{@main_target.name}.app" if type == "app") || ("#{@main_target.name}.xctest" if type == "xctest")
+
+    buildable_reference = (element.add_element('BuildableReference') if macro_exp == false) || (element.add_element('MacroExpansion').add_element('BuildableReference') if macro_exp == true)
+
+    buildable_reference.attributes['BuildableIdentifier'] = 'primary'
+    buildable_reference.attributes['BlueprintIdentifier'] = @main_target.uuid
+    buildable_reference.attributes['BuildableName']       = type
+    buildable_reference.attributes['BlueprintName']       = "#{@main_target.name}"
+    buildable_reference.attributes['ReferencedContainer'] = "container:#{@main_target.project.path.basename}"
+
+  end
+
+
   def test_action(script=nil, config=nil)
     ta = @scheme.doc.root.elements['TestAction']
     ta.attributes['buildConfiguration'] = config
