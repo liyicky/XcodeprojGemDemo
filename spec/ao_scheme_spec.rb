@@ -32,7 +32,7 @@ describe "AO_scheme" do
 
       before (:each) do
         @result       = Xcodeproj::XCScheme.new
-        @scheme_build = AO_scheme.new(@result, @main_target, @test_target, :debug)
+        @scheme_build = AO_scheme.new(@result, @main_target, @test_target)
       end 
 
       after (:each) do
@@ -75,7 +75,7 @@ describe "AO_scheme" do
 
       before (:each) do
         @result       = Xcodeproj::XCScheme.new
-        @scheme_build = AO_scheme.new(@result, @main_target, @test_target, :debug)
+        @scheme_build = AO_scheme.new(@result, @main_target, @test_target)
       end 
 
       after (:each) do

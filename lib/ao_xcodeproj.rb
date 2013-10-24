@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 
-require 'ao_xcodeproj/ao_scheme.rb'
 require 'xcodeproj'
 require 'debugger'
+require '../AO_Xcodeproj/lib/ao_xcodeproj/ao_scheme'
 
 
 class XcodeTestProj
@@ -64,22 +64,19 @@ class XcodeTestProj
   end
 
   def addCoverageScheme(coverage_script=nil)
-
     @coverage_script = coverage_script
     @coverage_script = "/bin/sh ${SRCROOT}/bin/coverage.sh" if (@coverage_script.nil?) 
-
     @coverage_scheme = Xcodeproj::XCScheme.new
-    @coverage_scheme.add_build_target(@main_target)
-    @coverage_scheme.add_build_target(@test_target)
 
-    buildCoverage = AO_scheme.new(@coverage_scheme, @main_target, @test_target, :debug)
+    buildCoverage = AO_scheme.new(@coverage_scheme, @main_target, @test_target)
     buildCoverage.test_action(@coverage_script, "Coverage")
     buildCoverage.profile_action
+
+    buildCoverage.save(@project_path, "Coverage")
 
     @project.add_build_configuration("Coverage", :debug)
     @project.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"] = ["YES"]
     @project.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"] = ["YES"]
-    buildCoverage.save(@project_path, "Coverage")
   end
 
   def addCoverageScript

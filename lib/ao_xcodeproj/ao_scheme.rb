@@ -2,14 +2,13 @@
 
 class AO_scheme
 
-  def initialize(scheme=nil, main_target=nil, test_target=nil, type=nil)
+  def initialize(scheme=nil, main_target=nil, test_target=nil)
     @scheme      = scheme
     @main_target = main_target
     @test_target = test_target
-    @type        = type
 
-    @scheme.add_build_target(@main_target)
-    @scheme.add_build_target(@test_target)
+    # @scheme.add_build_target(@main_target)
+    # @scheme.add_build_target(@test_target)
   end
 
   def test_action(script=nil, config=nil)
@@ -53,8 +52,8 @@ class AO_scheme
     pa_buildable_ref.attributes['ReferenceContainer']  = "container:#{@main_target.project.path.basename}"
   end
 
-  def save(path, name)
-    @scheme.save_as(path, name, @type)
+  def save(path, name, shared=false)
+    @scheme.save_as(path, name, shared)
   end
 
 end

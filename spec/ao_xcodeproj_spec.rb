@@ -36,11 +36,7 @@ describe "AO_Xcodeproj" do
   end
 
   describe "addCoverageScheme" do
-
-    before do
-      
-    end
-
+    
     it "creates Coverage.xcscheme files" do
       @project.addCoverageScheme
 
