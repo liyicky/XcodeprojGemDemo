@@ -70,6 +70,13 @@ class AO_scheme
     buildable_reference(pa_build_prod_runnable, "app")
   end
 
+  def launch_action
+    la = @scheme.doc.root.elements['LaunchAction']
+    la_buildable_product_runnable = la.add_element("BuildableProductRunnable")
+
+    buildable_reference(la_buildable_product_runnable, "app")
+  end
+
   def save(path, name, shared=false)
     @scheme.save_as(path, name, shared)
   end

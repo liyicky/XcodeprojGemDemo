@@ -181,6 +181,40 @@ describe "AO_scheme" do
       end
     end
 
+    describe "launch_action" do
+      before (:each) do
+        @result = Xcodeproj::XCScheme.new
+        @scheme_build = AO_scheme.new(@result, @main_target, @test_target)
+      end
+
+      after (:each) do
+        @result = nil
+        @scheme_build = nil
+      end
+
+      it "Adds a BuildableProductRunnable" do
+        @scheme_build.launch_action
+
+        @result = @result.doc.root.elements["LaunchAction"]
+        @result = true if @result.to_s().include? "BuildableProductRunnable"
+        @scheme = (true if @scheme.to_s().include? "BuildableProductRunnable") || false
+
+        @result.should == true
+        @scheme.should == false
+      end
+
+      it "Adds a BuildableReference" do
+        @scheme_build.launch_action
+
+        @result = @result.doc.root.elements["LaunchAction"]
+        @result = true if @result.to_s().include? "BuildableReference"
+        @scheme = (true if @scheme.to_s().include? "BuildableReference") || false
+
+        @result.should == true
+        @scheme.should == false
+      end
+    end
+
     describe "profile_action" do
 
       before (:each) do
