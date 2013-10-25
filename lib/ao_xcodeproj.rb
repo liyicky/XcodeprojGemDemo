@@ -46,7 +46,7 @@ class XcodeTestProj
       @test_target = @project.targets.find { |target| target.name == "#{@project_name}Tests" }
 
       puts "Opened #{@project_name} : #{@main_target.uuid}"
-      
+
     #Creates a new Xcodeproj in the root dir
     else
       @project_path = @project_path + "/#{@project_name}.xcodeproj"
@@ -54,7 +54,7 @@ class XcodeTestProj
       @project.new_target(:application, 'Xcode', :ios)
       @project.new_target(:bundle, 'Tests', :ios)
       @main_target = @project.targets.find { |target| target.name == "Xcode"}
-      @test_target = @project.targets.find { |target| target.name == "Tests"}  
+      @test_target = @project.targets.find { |target| target.name == "Tests"}
     end
   end
 
@@ -65,13 +65,14 @@ class XcodeTestProj
 
   def addCoverageScheme(coverage_script=nil)
     @coverage_script = coverage_script
-    @coverage_script = "/bin/sh ${SRCROOT}/bin/coverage.sh" if (@coverage_script.nil?) 
+    @coverage_script = "/bin/sh ${SRCROOT}/bin/coverage.sh" if (@coverage_script.nil?)
     @coverage_scheme = Xcodeproj::XCScheme.new
 
     buildCoverage = AO_scheme.new(@coverage_scheme, @main_target, @test_target)
     buildCoverage.add_target
     buildCoverage.test_action(@coverage_script, "Coverage")
     # buildCoverage.profile_action
+
 
     buildCoverage.save(@project_path, "Coverage")
 

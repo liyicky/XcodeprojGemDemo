@@ -23,25 +23,21 @@ class AO_scheme
     build_action_entry.attributes['buildForArchiving']    = 'YES'
     build_action_entry.attributes['buildForAnalyzing']    = 'YES'
 
-    buildable_reference = build_action_entry.add_element 'BuildableReference'
-    buildable_reference.attributes['BuildableIdentifier'] = 'primary'
-    buildable_reference.attributes['BlueprintIdentifier'] = target.uuid
-    buildable_reference.attributes['BuildableName']       = "#{target}.app"
-    buildable_reference.attributes['BlueprintName']       = target.name
-    buildable_reference.attributes['ReferencedContainer'] = "container:#{target.project.path.basename}"
+    buildable_reference(build_action_entry, "app")
 
   end
 
   def buildable_reference(element, type, macro_exp=false)
-    type = ("#{@main_target.name}.app" if type == "app") || ("#{@main_target.name}.xctest" if type == "xctest")
-
+    target = (@main_target if type == "app") || (@test_target if type == "xctest")
+    type = ("#{@main_target.name}.app" if type == "app") || ("#{@test_target.name}.xctest" if type == "xctest")
     buildable_reference = (element.add_element('BuildableReference') if macro_exp == false) || (element.add_element('MacroExpansion').add_element('BuildableReference') if macro_exp == true)
 
+
     buildable_reference.attributes['BuildableIdentifier'] = 'primary'
-    buildable_reference.attributes['BlueprintIdentifier'] = @main_target.uuid
+    buildable_reference.attributes['BlueprintIdentifier'] = target.uuid
     buildable_reference.attributes['BuildableName']       = type
-    buildable_reference.attributes['BlueprintName']       = "#{@main_target.name}"
-    buildable_reference.attributes['ReferencedContainer'] = "container:#{@main_target.project.path.basename}"
+    buildable_reference.attributes['BlueprintName']       = target.name
+    buildable_reference.attributes['ReferencedContainer'] = "container:#{target.project.path.basename}"
 
   end
 
@@ -57,34 +53,21 @@ class AO_scheme
     ta_action_content.attributes["title"] = "Run Script"
     ta_action_content.attributes["scriptText"] = script
     ta_env_buildable = ta_action_content.add_element("EnvironmentBuildable")
-    ta_buildable_ref = ta_env_buildable.add_element("BuildableReference")
-    ta_buildable_ref.attributes["BuildableIdentifier"] = "primary"
-    ta_buildable_ref.attributes["BlueprintIdentifier"] = @main_target.uuid
-    ta_buildable_ref.attributes["BuildableName"]       = "#{@main_target.name}.app"
-    ta_buildable_ref.attributes["BlueprintName"]       = "#{@main_target.name}"
-    ta_buildable_ref.attributes["ReferencedContainer"] = "container:#{@main_target.project.path.basename}"
+    buildable_reference(ta_env_buildable, "app")
 
-    # Testables (Adds the Test Target)
     ta_testables = ta.elements['Testables']
     ta_testable_reference = ta_testables.add_element('TestableReference')
     ta_testable_reference.attributes['skipped'] = 'NO'
-    ta_testable_buildable_ref = ta_testable_reference.add_element('BuildableReference')
-    ta_testable_buildable_ref.attributes["BuildableIdentifier"] = "primary"
-    ta_testable_buildable_ref.attributes["BlueprintIdentifier"] = @test_target.uuid
-    ta_testable_buildable_ref.attributes["BuildableName"]       = "#{@test_target.name}.xctest"
-    ta_testable_buildable_ref.attributes["BlueprintName"]       = "#{@test_target.name}"
-    ta_testable_buildable_ref.attributes["ReferencedContainer"]  = "container:#{@test_target.project.path.basename}"
+    buildable_reference(ta_testable_reference, "xctest")
+
+    buildable_reference(ta, "app", true)
+
   end
 
   def profile_action
     pa = @scheme.doc.root.elements['ProfileAction']
     pa_build_prod_runnable = pa.add_element('BuildableProductRunnable')
-    pa_buildable_ref = pa_build_prod_runnable.add_element('BuildableReference')
-    pa_buildable_ref.attributes['BuildableIdentifier'] = 'primary'
-    pa_buildable_ref.attributes['BlueprintIdentifier'] = @main_target.uuid
-    pa_buildable_ref.attributes['BuildableName']       = "#{@main_target.name}.app"
-    pa_buildable_ref.attributes['BlueprintName']       = @main_target.name
-    pa_buildable_ref.attributes['ReferenceContainer']  = "container:#{@main_target.project.path.basename}"
+    buildable_reference(pa_build_prod_runnable, "app")
   end
 
   def save(path, name, shared=false)
