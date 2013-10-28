@@ -59,8 +59,8 @@ class XcodeTestProj
   end
 
   def addTestTargets
-    @coverage_target = @project.new_target(:bundle, "Coverage", :ios)
-    @test_flight_target = @project.new_target(:bundle, "TestFlight", :ios)
+    @project.new_target(:bundle, "Coverage", :ios)
+    @project.new_target(:bundle, "TestFlight", :ios)
   end
 
   def addCoverageScheme(coverage_script=nil)
@@ -68,17 +68,17 @@ class XcodeTestProj
     @coverage_script = "/bin/sh ${SRCROOT}/bin/coverage.sh" if (@coverage_script.nil?)
     @coverage_scheme = Xcodeproj::XCScheme.new
 
-    buildCoverage = AO_scheme.new(@coverage_scheme, @main_target, @test_target)
-    buildCoverage.add_target
-    buildCoverage.test_action(@coverage_script, "Coverage")
-    # buildCoverage.profile_action
-
-
-    buildCoverage.save(@project_path, "Coverage")
-
     @project.add_build_configuration("Coverage", :debug)
     @project.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"] = ["YES"]
     @project.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"] = ["YES"]
+
+    buildCoverage = AO_scheme.new(@coverage_scheme, @main_target, @test_target, "Coverage")
+    buildCoverage.add_target
+    buildCoverage.test_action(@coverage_script)
+    buildCoverage.launch_action
+    buildCoverage.profile_action
+    buildCoverage.save(@project_path, "Coverage")
+
   end
 
   def addCoverageScript

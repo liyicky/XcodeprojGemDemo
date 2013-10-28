@@ -2,10 +2,11 @@
 
 class AO_scheme
 
-  def initialize(scheme=nil, main_target=nil, test_target=nil)
+  def initialize(scheme=nil, main_target=nil, test_target=nil, config="Debug")
     @scheme      = scheme
     @main_target = main_target
     @test_target = test_target
+    @config = config
 
     # @scheme.add_build_target(@main_target)
     # @scheme.add_build_target(@test_target)
@@ -42,9 +43,15 @@ class AO_scheme
   end
 
 
-  def test_action(script=nil, config=nil)
+  def test_action(script=nil)
     ta = @scheme.doc.root.elements['TestAction']
-    ta.attributes['buildConfiguration'] = config
+    ta.attributes['buildConfiguration'] = @config
+
+    ta_testables = ta.elements['Testables']
+    ta_testable_reference = ta_testables.add_element('TestableReference')
+    ta_testable_reference.attributes['skipped'] = 'NO'
+    buildable_reference(ta_testable_reference, "xctest")
+
 
     ta_post_action = ta.add_element("PostActions")
     ta_execute_action = ta_post_action.add_element("ExecutionAction")
@@ -54,11 +61,6 @@ class AO_scheme
     ta_action_content.attributes["scriptText"] = script
     ta_env_buildable = ta_action_content.add_element("EnvironmentBuildable")
     buildable_reference(ta_env_buildable, "app")
-
-    ta_testables = ta.elements['Testables']
-    ta_testable_reference = ta_testables.add_element('TestableReference')
-    ta_testable_reference.attributes['skipped'] = 'NO'
-    buildable_reference(ta_testable_reference, "xctest")
 
     buildable_reference(ta, "app", true)
 
@@ -72,6 +74,7 @@ class AO_scheme
 
   def launch_action
     la = @scheme.doc.root.elements['LaunchAction']
+    la.attributes["buildConfiguration"] = @config
     la_buildable_product_runnable = la.add_element("BuildableProductRunnable")
 
     buildable_reference(la_buildable_product_runnable, "app")

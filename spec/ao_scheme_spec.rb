@@ -132,7 +132,7 @@ describe "AO_scheme" do
 
       before (:each) do
         @result       = Xcodeproj::XCScheme.new
-        @scheme_build = AO_scheme.new(@result, @main_target, @test_target)
+        @scheme_build = AO_scheme.new(@result, @main_target, @test_target, "Main")
       end
 
       after (:each) do
@@ -140,12 +140,12 @@ describe "AO_scheme" do
       end
 
       it "Builds a test_action in a scheme" do
-        @scheme_build.test_action("echo script", "Main")
+        @scheme_build.test_action("echo script")
         @result.should_not == @scheme
       end
 
       it "Sets the buildConfiguration" do
-        @scheme_build.test_action("echo script", "Main")
+        @scheme_build.test_action("echo script")
 
         @result = true if @result.to_s().include? "buildConfiguration = \"Main\">"
         @scheme = (true if @scheme.to_s().include? "buildConfiguration = \"Main\">") || false
@@ -154,7 +154,7 @@ describe "AO_scheme" do
       end
 
       it "Adds Testable elements" do
-        @scheme_build.test_action("echo script", "Main")
+        @scheme_build.test_action("echo script")
 
         @result = true if @result.to_s().include? "TestableReference"
         @scheme = (true if @scheme.to_s().include? "TestableReference") || false
@@ -163,7 +163,7 @@ describe "AO_scheme" do
       end
 
       it "Adds script to Testable elements" do
-        @scheme_build.test_action("this is the script", "Main")
+        @scheme_build.test_action("this is the script")
         @result = @result.doc.root.elements["TestAction"]
 
         @result.to_s().should include "this is the script"
@@ -171,7 +171,7 @@ describe "AO_scheme" do
       end
 
       it "Adds a MacroExpansion" do
-        @scheme_build.test_action("echo liyickywashere", "Main")
+        @scheme_build.test_action("echo liyickywashere")
         @result = @result.doc.root.elements['TestAction']
         @result = true if @result.to_s().include? "MacroExpansion"
         @scheme = (true if @scheme.to_s().include? "MacroExpansion") || false
