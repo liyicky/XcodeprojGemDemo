@@ -69,6 +69,8 @@ class XcodeTestProj
     @coverage_scheme = Xcodeproj::XCScheme.new
 
     @project.add_build_configuration("Coverage", :debug)
+    @project.build_settings("Coverage")["ARCHS"] = ["$(ARCHS_STANDARD_INCLUDING_64_BIT)"]
+    @project.build_settings("Coverage")["SDKROOT"] = ["iphoneos"]
     @project.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"] = ["YES"]
     @project.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"] = ["YES"]
 
