@@ -68,9 +68,15 @@ class XcodeTestProj
     @coverage_script = "/bin/sh ${SRCROOT}/bin/coverage.sh" if (@coverage_script.nil?)
     @coverage_scheme = Xcodeproj::XCScheme.new
 
+    search_paths = @project.build_settings("Debug")["FRAMEWORK_SEARCH_PATHS"]
+
     @project.add_build_configuration("Coverage", :debug)
     @project.build_settings("Coverage")["ARCHS"] = ["$(ARCHS_STANDARD_INCLUDING_64_BIT)"]
+    @project.build_settings("Coverage")["BUNDLE_LOADER"] = ["$(BUILT_PRODUCTS_DIR)/#{@project_name}.app/#{@project_name}"]
     @project.build_settings("Coverage")["SDKROOT"] = ["iphoneos"]
+    @project.build_settings("Coverage")["FRAMEWORK_SEARCH_PATHS"] = search_paths
+    @project.build_settings("Coverage")["GCC_PREPROCESSOR_DEFINITIONS"] = ["COVERAGE=1"]
+    @project.build_settings("Coverage")["IPHONEOS_DEPLOYMENT_TARGET"] = ["7.0"]
     @project.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"] = ["YES"]
     @project.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"] = ["YES"]
 
