@@ -4,76 +4,20 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Coverage.xcscheme</key>
+		<key>TestProj.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<true/>
-			<key>orderHint</key>
-			<integer>1</integer>
-		</dict>
-		<key>GreenCat.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
-		</dict>
-		<key>Versioning.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<true/>
-			<key>orderHint</key>
-			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>61FAE663B6E049A586840AC0</key>
+		<key>7B8C51C5182149B9008DC600</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7B80F18918187FA5005578A0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7B80F1A418187FA5005578A0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7BA6BF871815CCCC0083501F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7BBC4B8C181577EE00262E4F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7BBC4BA7181577EF00262E4F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>80A4EA4D64A5490AB585D774</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>94A09E33FDCB43479D80330C</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A7C0CC2B46D64779BB94E443</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F15EDFEAEAB941E690FAA88C</key>
+		<key>7B8C51E0182149B9008DC600</key>
 		<dict>
 			<key>primary</key>
 			<true/>
