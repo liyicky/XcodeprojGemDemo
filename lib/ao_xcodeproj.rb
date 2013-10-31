@@ -37,7 +37,7 @@ class XcodeTestProj
       @project = Xcodeproj::Project.new(@project_path)
       @project.new_target(:application, 'Xcode', :ios)
       @main_target = @project.targets.find { |target| target.name == "Main"}
-      @test_target = @project.targets.find { |target| target.name == "#{@project_name}Tests" }
+      @test_target = @project.targets.find { |target| target.name == "#{@project_name}Test" }
 
     #Opens existing Xcodeproj
     elsif (@project_path.include? ".xcodeproj")
@@ -52,9 +52,9 @@ class XcodeTestProj
       @project_path = @project_path + "/#{@project_name}.xcodeproj"
       @project = Xcodeproj::Project.new(@project_path)
       @project.new_target(:application, 'Main', :ios)
-      @project.new_target(:bundle, 'Tests', :ios)
+      @project.new_target(:bundle, 'Test', :ios)
       @main_target = @project.targets.find { |target| target.name == "Main"}
-      @test_target = @project.targets.find { |target| target.name == "Tests"}
+      @test_target = @project.targets.find { |target| target.name == "Test"}
     end
   end
 
@@ -68,7 +68,7 @@ class XcodeTestProj
     @coverage_script = "/bin/sh ${SRCROOT}/bin/coverage.sh" if (@coverage_script.nil?)
     @coverage_scheme = Xcodeproj::XCScheme.new
 
-    coverage_build_settings = { "ALWAYS_SEARCH_USER_PATHS"=>"NO", "CLANG_CXX_LANGUAGE_STANDARD"=>"gnu++0x", "CLANG_CXX_LIBRARY"=>"libc++", "CLANG_ENABLE_OBJC_ARC"=>"YES", "CLANG_WARN_BOOL_CONVERSION"=>"YES", "CLANG_WARN_CONSTANT_CONVERSION"=>"YES", "CLANG_WARN_DIRECT_OBJC_ISA_USAGE"=>"YES_ERROR", "CLANG_WARN_EMPTY_BODY"=>"YES", "CLANG_WARN_ENUM_CONVERSION"=>"YES", "CLANG_WARN_INT_CONVERSION"=>"YES", "CLANG_WARN_OBJC_ROOT_CLASS"=>"YES_ERROR", "CLANG_ENABLE_MODULES"=>"YES", "GCC_C_LANGUAGE_STANDARD"=>"gnu99", "GCC_WARN_64_TO_32_BIT_CONVERSION"=>"YES", "GCC_WARN_ABOUT_RETURN_TYPE"=>"YES_ERROR", "GCC_WARN_UNDECLARED_SELECTOR"=>"YES", "GCC_WARN_UNINITIALIZED_AUTOS"=>"YES", "GCC_WARN_UNUSED_FUNCTION"=>"YES", "GCC_WARN_UNUSED_VARIABLE"=>"YES", "ONLY_ACTIVE_ARCH"=>"YES", "COPY_PHASE_STRIP"=>"YES", "GCC_DYNAMIC_NO_PIC"=>"NO", "GCC_OPTIMIZATION_LEVEL"=>"0", "GCC_SYMBOLS_PRIVATE_EXTERN"=>"NO", "GCC_GENERATE_TEST_COVERAGE_FILES"=>"YES", "GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"=>"YES", "SDKROOT"=>"iphoneos", "IPHONEOS_DEPLOYMENT_TARGET"=>"7.0", "ARCHS"=>"$(ARCHS_STANDARD_INCLUDING_64_BIT)", "TEST_HOST"=>"$(BUNDLE_LOADER)"}
+    coverage_build_settings = { "ALWAYS_SEARCH_USER_PATHS"=>"NO", "CLANG_CXX_LANGUAGE_STANDARD"=>"gnu++0x", "CLANG_CXX_LIBRARY"=>"libc++", "CLANG_ENABLE_OBJC_ARC"=>"YES", "CLANG_WARN_BOOL_CONVERSION"=>"YES", "CLANG_WARN_CONSTANT_CONVERSION"=>"YES", "CLANG_WARN_DIRECT_OBJC_ISA_USAGE"=>"YES_ERROR", "CLANG_WARN_EMPTY_BODY"=>"YES", "CLANG_WARN_ENUM_CONVERSION"=>"YES", "CLANG_WARN_INT_CONVERSION"=>"YES", "CLANG_WARN_OBJC_ROOT_CLASS"=>"YES_ERROR", "CLANG_ENABLE_MODULES"=>"YES", "GCC_C_LANGUAGE_STANDARD"=>"gnu99", "GCC_WARN_64_TO_32_BIT_CONVERSION"=>"YES", "GCC_WARN_ABOUT_RETURN_TYPE"=>"YES_ERROR", "GCC_WARN_UNDECLARED_SELECTOR"=>"YES", "GCC_WARN_UNINITIALIZED_AUTOS"=>"YES", "GCC_WARN_UNUSED_FUNCTION"=>"YES", "GCC_WARN_UNUSED_VARIABLE"=>"YES", "ONLY_ACTIVE_ARCH"=>"YES", "COPY_PHASE_STRIP"=>"YES", "GCC_DYNAMIC_NO_PIC"=>"NO", "GCC_OPTIMIZATION_LEVEL"=>"0", "GCC_SYMBOLS_PRIVATE_EXTERN"=>"NO", "GCC_GENERATE_TEST_COVERAGE_FILES"=>"YES", "GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"=>"YES", "SDKROOT"=>"iphoneos", "IPHONEOS_DEPLOYMENT_TARGET"=>"7.0", "ARCHS"=>"$(ARCHS_STANDARD_INCLUDING_64_BIT)", "TEST_HOST"=>"$(BUNDLE_LOADER)", "WRAPPER_EXTENSION"=>"xctest", "GCC_PREFIX_HEADER"=>"#{@test_target.name }/#{@test_target.name}-Prefix.pch", "GCC_PRECOMPILE_PREFIX_HEADER"=>"YES",  }
 
 
 
