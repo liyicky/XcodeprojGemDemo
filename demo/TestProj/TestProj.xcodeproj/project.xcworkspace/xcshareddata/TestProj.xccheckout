@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>0214F69E-8AD3-49E1-8E00-D45CB785EB8F</string>
+	<string>CA61DF5C-F975-47F8-9A58-E5A79270B68D</string>
 	<key>IDESourceControlProjectName</key>
 	<string>TestProj</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,7 +14,7 @@
 		<string>https://github.com/liyicky/XcodeprojGemDemo.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>XcodeprojGemDemo/TestProj/TestProj.xcodeproj/project.xcworkspace</string>
+	<string>demo/TestProj/TestProj.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>0F18B95B-5C06-4446-9810-425690A761C2</key>

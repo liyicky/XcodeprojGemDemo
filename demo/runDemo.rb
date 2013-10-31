@@ -9,6 +9,6 @@ test_cat = XcodeTestProj.new("demo/TestProj/TestProj.xcodeproj", "TestProj")
 
 
 test_cat.addCoverageScheme
-# test_cat.addVersioningScheme
+test_cat.addVersioningScheme
 test_cat.addCoverageScript
 test_cat.saveProject
