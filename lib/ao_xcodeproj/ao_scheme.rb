@@ -6,7 +6,7 @@ class AO_scheme
     @scheme      = scheme
     @main_target = main_target
     @test_target = test_target
-    @config = config
+    @config      = config
 
     # @scheme.add_build_target(@main_target)
     # @scheme.add_build_target(@test_target)

@@ -10,6 +10,8 @@ describe "AO_Xcodeproj" do
     @project      = XcodeTestProj.new("TestingProject_wY0kK5cNi8", "TestingProject")
     @project_path = @project.project_path
     @root_path    = @project.root_path
+    @main_target  = @project.project.new_target(:application, 'Main', :ios)
+    @test_target  = @project.project.new_target(:application, 'Test', :ios)
   end
 
   after (:each) do
@@ -99,6 +101,24 @@ describe "AO_Xcodeproj" do
        @project.project.build_settings("Coverage")["IPHONEOS_DEPLOYMENT_TARGET"].should == "7.0"
      end
 
+     it "should have OTHER_CFLAGS set" do
+       @project.project.build_settings("Coverage")["OTHER_CFLAGS\[arch=*\]"].should ==  ["-fprofile-arcs", "-ftest-coverage"]
+     end
+
+    it "should have GCC_PREFIX_HEADER set to test_target.name-Prefix.pch" do
+      @project.project.build_settings("Coverage")["GCC_PREFIX_HEADER"].should == "#{@test_target.name }/#{@test_target.name}-Prefix.pch"
+    end
+
+    it "should have INFOPLIST_FILE set to test_target.name-Info.plist" do
+      @project.project.build_settings("Coverage")["INFOPLIST_FILE"].should == "#{@test_target.name }/#{@test_target.name}-Info.plist"
+    end
+
+    it "should have VERSIONING_SYSTEM set to apple-generic" do
+      @project.project.build_settings("Coverage")["VERSIONING_SYSTEM"].should == "apple-generic"
+    end
+     it "should set BUNDLE_LOADER to main_target.app" do
+      @project.project.build_settings("Coverage")["BUNDLE_LOADER"].should == "$(BUILT_PRODUCTS_DIR)/#{@main_target.name}.app/#{@main_target.name}"
+    end
   end
 
   describe "addCoverageScript" do
