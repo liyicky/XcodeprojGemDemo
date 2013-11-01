@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7B8C52001821B390008DC600"
+               BlueprintIdentifier = "7B8C523B1822F6D6008DC600"
                BuildableName = "TestProj.app"
                BlueprintName = "TestProj"
                ReferencedContainer = "container:TestProj.xcodeproj">

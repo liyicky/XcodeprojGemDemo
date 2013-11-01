@@ -116,9 +116,14 @@ describe "AO_Xcodeproj" do
     it "should have VERSIONING_SYSTEM set to apple-generic" do
       @project.project.build_settings("Coverage")["VERSIONING_SYSTEM"].should == "apple-generic"
     end
-     it "should set BUNDLE_LOADER to main_target.app" do
-      @project.project.build_settings("Coverage")["BUNDLE_LOADER"].should == "$(BUILT_PRODUCTS_DIR)/#{@main_target.name}.app/#{@main_target.name}"
-    end
+
+     it "should set PRODUCT_NAME equal to $(TARGET_NAME)" do
+       @project.project.build_settings("Coverage")["PRODUCT_NAME"].should == "$(TARGET_NAME)"
+     end
+
+     it "should set VALIDATE_PRODUCT to NO" do
+       @project.project.build_settings("Coverage")["VALIDATE_PRODUCT"].should == "NO"
+     end
   end
 
   describe "addCoverageScript" do
