@@ -1,5 +1,5 @@
 //
-//  LIYAppDelegate.h
+//  LIYMasterViewController.h
 //  TestProj
 //
 //  Created by Jason Cheladyn on 11/4/13.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LIYAppDelegate : UIResponder <UIApplicationDelegate>
-
-@property (strong, nonatomic) UIWindow *window;
+@interface LIYMasterViewController : UITableViewController
 
 @end
