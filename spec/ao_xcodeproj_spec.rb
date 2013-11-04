@@ -71,19 +71,13 @@ describe "AO_Xcodeproj" do
       @result.should == @script
     end
 
-    it "should have GCC_GENERATE_TEST_COVERAGE_FILES equal to YES" do
+    it "should set Coverage Build Settings for the Project" do
       @project.project.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"].should == "YES"
       @project.project.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"].should == "YES"
-      @project.project.build_settings("Coverage")["SDKROOT"].should == "iphoneos"
+      @project.project.build_settings("Coverage")["SDKROOT"].should == "macosx"
       @project.project.build_settings("Coverage")["ARCHS"].should == "$(ARCHS_STANDARD_INCLUDING_64_BIT)"
-      @project.project.build_settings("Coverage")["GCC_PREPROCESSOR_DEFINITIONS"].should == ["DEBUG=1", "COVERAGE=1"]
       @project.project.build_settings("Coverage")["IPHONEOS_DEPLOYMENT_TARGET"].should == "7.0"
-      @project.project.build_settings("Coverage")["OTHER_CFLAGS\[arch=*\]"].should ==  ["-fprofile-arcs", "-ftest-coverage"]
-      @project.project.build_settings("Coverage")["VERSIONING_SYSTEM"].should == "apple-generic"
-      @project.project.build_settings("Coverage")["PRODUCT_NAME"].should == "$(TARGET_NAME)"
-      @project.project.build_settings("Coverage")["VALIDATE_PRODUCT"].should == "NO"
     end
-
 
     it "should have FRAMEWORK_SEARCH_PATHS equal to the Debug Scheme's search paths" do
       debug_search_paths = ["$(SDKROOT)/Developer/Library/Frameworks", "$(inherited)", "$(DEVELOPER_FRAMEWORKS_DIR)"]
@@ -97,6 +91,19 @@ describe "AO_Xcodeproj" do
     it "should have INFOPLIST_FILE set to test_target.name-Info.plist" do
       @project.project.build_settings("Coverage")["INFOPLIST_FILE"].should == "#{@test_target.name }/#{@test_target.name}-Info.plist"
     end
+
+    it "should set Coverage Build Settings for the Main Target" do
+      @main_target.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"].should == "YES"
+      @main_target.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"].should == "YES"
+      @main_target.build_settings("Coverage")["SDKROOT"].should == "iphoneos"
+      @main_target.build_settings("Coverage")["ARCHS"].should == "$(ARCHS_STANDARD_INCLUDING_64_BIT)"
+      @main_target.build_settings("Coverage")["GCC_PREPROCESSOR_DEFINITIONS"].should == ["DEBUG=1", "COVERAGE=1"]
+      @main_target.build_settings("Coverage")["IPHONEOS_DEPLOYMENT_TARGET"].should == "7.0"
+      @main_target.build_settings("Coverage")["VERSIONING_SYSTEM"].should == "apple-generic"
+      @main_target.build_settings("Coverage")["PRODUCT_NAME"].should == "$(TARGET_NAME)"
+      @main_target.build_settings("Coverage")["VALIDATE_PRODUCT"].should == "NO"
+    end
+
   end
 
   describe "addCoverageScript" do
