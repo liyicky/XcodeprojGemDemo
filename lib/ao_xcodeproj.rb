@@ -67,22 +67,16 @@ class XcodeTestProj
     @coverage_script = "/bin/sh ${SRCROOT}/bin/coverage.sh" if (@coverage_script.nil?)
     @coverage_scheme = Xcodeproj::XCScheme.new
 
+    project_settings     = {"CLANG_WARN_ENUM_CONVERSION"=>"YES", "GCC_WARN_UNUSED_VARIABLE"=>"YES", "GCC_WARN_ABOUT_RETURN_TYPE"=>"YES_ERROR", "GCC_PREPROCESSOR_DEFINITIONS"=>["DEBUG=1", "$(inherited)"], "ONLY_ACTIVE_ARCH"=>"YES", "CLANG_ENABLE_MODULES"=>"YES", "CLANG_CXX_LANGUAGE_STANDARD"=>"gnu++0x", "GCC_SYMBOLS_PRIVATE_EXTERN"=>"NO", "GCC_WARN_UNINITIALIZED_AUTOS"=>"YES", "CLANG_WARN_INT_CONVERSION"=>"YES", "CLANG_WARN_CONSTANT_CONVERSION"=>"YES", "GCC_OPTIMIZATION_LEVEL"=>"0", "GCC_C_LANGUAGE_STANDARD"=>"gnu99", "CLANG_WARN__DUPLICATE_METHOD_MATCH"=>"YES", "CLANG_WARN_EMPTY_BODY"=>"YES", "GCC_WARN_64_TO_32_BIT_CONVERSION"=>"YES", "ALWAYS_SEARCH_USER_PATHS"=>"NO", "CLANG_WARN_DIRECT_OBJC_ISA_USAGE"=>"YES_ERROR", "COPY_PHASE_STRIP"=>"NO", "CLANG_WARN_BOOL_CONVERSION"=>"YES", "CLANG_ENABLE_OBJC_ARC"=>"YES", "GCC_WARN_UNUSED_FUNCTION"=>"YES", "GCC_DYNAMIC_NO_PIC"=>"NO", "CLANG_WARN_OBJC_ROOT_CLASS"=>"YES_ERROR", "CODE_SIGN_IDENTITY[sdk=iphoneos*]"=>"iPhone Developer", "ARCHS"=>"$(ARCHS_STANDARD_INCLUDING_64_BIT)", "IPHONEOS_DEPLOYMENT_TARGET"=>"7.0", "SDKROOT"=>"iphoneos", "CLANG_CXX_LIBRARY"=>"libc++", "GCC_WARN_UNDECLARED_SELECTOR"=>"YES"}
+    main_target_settings = {"PRODUCT_NAME"=>"$(TARGET_NAME)", "WRAPPER_EXTENSION"=>"app", "GCC_PRECOMPILE_PREFIX_HEADER"=>"YES", "INFOPLIST_FILE"=>"TestProj/TestProj-Info.plist", "ASSETCATALOG_COMPILER_APPICON_NAME"=>"AppIcon", "ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME"=>"LaunchImage", "GCC_PREFIX_HEADER"=>"TestProj/TestProj-Prefix.pch"}
+    test_target_settings = {"PRODUCT_NAME"=>"$(TARGET_NAME)", "WRAPPER_EXTENSION"=>"xctest", "FRAMEWORK_SEARCH_PATHS"=>["$(SDKROOT)/Developer/Library/Frameworks", "$(inherited)", "$(DEVELOPER_FRAMEWORKS_DIR)"], "TEST_HOST"=>"$(BUNDLE_LOADER)", "ARCHS"=>"$(ARCHS_STANDARD_INCLUDING_64_BIT)", "GCC_PRECOMPILE_PREFIX_HEADER"=>"YES", "INFOPLIST_FILE"=>"TestProjTests/TestProjTests-Info.plist", "BUNDLE_LOADER"=>"$(BUILT_PRODUCTS_DIR)/TestProj.app/TestProj", "GCC_PREFIX_HEADER"=>"TestProj/TestProj-Prefix.pch", "GCC_PREPROCESSOR_DEFINITIONS"=>["DEBUG=1", "$(inherited)"], "VALIDATE_PRODUCT"=>"NO", "ENABLE_NS_ASSERTIONS"=>"YES", "INFOPLIST_FILE"=>"#{@test_target.name}/#{@test_target.name}-Info.plist" }
     @project.add_build_configuration("Coverage", :debug)
-
     @main_target.add_build_configuration("Coverage", :debug)
-    @main_target.build_settings("Coverage")["ARCHS"] = "$(ARCHS_STANDARD_INCLUDING_64_BIT)"
-    @main_target.build_settings("Coverage")["SDKROOT"] = "iphoneos"
-    @main_target.build_settings("Coverage")["IPHONEOS_DEPLOYMENT_TARGET"] = "7.0"
-    @main_target.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"] = "YES"
-    @main_target.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"] = "YES"
-    @main_target.build_settings("Coverage")["GCC_PREPROCESSOR_DEFINITIONS"] = ["COVERAGE=1", "DEBUG=1"]
-    @main_target.build_settings("Coverage")["VERSIONING_SYSTEM"] = "apple-generic"
-    #@main_target.build_settings("Coverage")["INFOPLIST_FILE"] = "Info.plist"
-    @main_target.build_settings("Coverage")["INSTALL_PATH"] = "/Applications"
-    @main_target.build_settings("Coverage")["PRODUCT_NAME"] = "#{@main_target.name}"
-    @main_target.build_settings("Coverage")["SKIP_INSTALL"] = "NO"
-    #@main_target.build_settings("Coverage")["GCC_PRECOMPILE_PREFIX_HEADER"] = "YES"
-    #@main_target.build_settings("Coverage")["GCC_PREFIX_HEADER"] = "#{@main_target.name}-Prefix.pch"
+    @test_target.add_build_configuration("Coverage", :debug)
+
+    project_settings.each{|key, value| @project.build_settings("Coverage")[key] = value}
+    main_target_settings.each{|key, value| @main_target.build_settings("Coverage")[key] = value}
+    test_target_settings.each{|key, value| @test_target.build_settings("Coverage")[key] = value}
 
     buildCoverage = AO_scheme.new(@coverage_scheme, @main_target, @test_target, "Coverage")
     buildCoverage.add_target
