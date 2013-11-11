@@ -2,23 +2,18 @@ require 'spec_helper'
 
 describe "AO_Xcodeproj" do
 
-  before do
-    include Spec_helper
-  end
-
   before  do
+    include Spec_helper
     @project      = XcodeTestProj.new("TestingProject_wY0kK5cNi8", "TestingProject")
+    @xcproj       = @project.project
     @project_path = @project.project_path
     @root_path    = @project.root_path
-    @main_target  = @project.project.new_target(:application, 'Main', :ios)
-    @test_target  = @project.project.new_target(:application, 'Test', :ios)
+    @main_target  = @project.main_target
+    @test_target  = @project.test_target
   end
 
   after (:each) do
     @result       = nil
-    @project      = nil
-    @project_path = nil
-    @root_path    = nil
   end
 
   after do
@@ -72,36 +67,17 @@ describe "AO_Xcodeproj" do
     end
 
     it "should set Coverage Build Settings for the Project" do
-      @project.project.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"].should == "YES"
-      @project.project.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"].should == "YES"
-      @project.project.build_settings("Coverage")["SDKROOT"].should == "macosx"
-      @project.project.build_settings("Coverage")["ARCHS"].should == "$(ARCHS_STANDARD_INCLUDING_64_BIT)"
-      @project.project.build_settings("Coverage")["IPHONEOS_DEPLOYMENT_TARGET"].should == "7.0"
-    end
-
-    it "should have FRAMEWORK_SEARCH_PATHS equal to the Debug Scheme's search paths" do
-      debug_search_paths = ["$(SDKROOT)/Developer/Library/Frameworks", "$(inherited)", "$(DEVELOPER_FRAMEWORKS_DIR)"]
-      @project.project.build_settings("Coverage")["FRAMEWORK_SEARCH_PATHS"].should == debug_search_paths
-    end
-
-    it "should have GCC_PREFIX_HEADER set to test_target.name-Prefix.pch" do
-      @project.project.build_settings("Coverage")["GCC_PREFIX_HEADER"].should == "#{@test_target.name }/#{@test_target.name}-Prefix.pch"
-    end
-
-    it "should have INFOPLIST_FILE set to test_target.name-Info.plist" do
-      @project.project.build_settings("Coverage")["INFOPLIST_FILE"].should == "#{@test_target.name }/#{@test_target.name}-Info.plist"
+      @xcproj.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"].should == "YES"
+      @xcproj.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"].should == "YES"
+      @xcproj.build_settings("Coverage")["SDKROOT"].should == "iphoneos"
+      @xcproj.build_settings("Coverage")["ARCHS"].should == "$(ARCHS_STANDARD_INCLUDING_64_BIT)"
+      @xcproj.build_settings("Coverage")["IPHONEOS_DEPLOYMENT_TARGET"].should == "7.0"
+      @xcproj.build_settings("Coverage")["CLANG_WARN_ENUM_CONVERSION"].should == "YES"
     end
 
     it "should set Coverage Build Settings for the Main Target" do
-      @main_target.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"].should == "YES"
-      @main_target.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"].should == "YES"
-      @main_target.build_settings("Coverage")["SDKROOT"].should == "iphoneos"
-      @main_target.build_settings("Coverage")["ARCHS"].should == "$(ARCHS_STANDARD_INCLUDING_64_BIT)"
-      @main_target.build_settings("Coverage")["GCC_PREPROCESSOR_DEFINITIONS"].should == ["DEBUG=1", "COVERAGE=1"]
-      @main_target.build_settings("Coverage")["IPHONEOS_DEPLOYMENT_TARGET"].should == "7.0"
-      @main_target.build_settings("Coverage")["VERSIONING_SYSTEM"].should == "apple-generic"
       @main_target.build_settings("Coverage")["PRODUCT_NAME"].should == "$(TARGET_NAME)"
-      @main_target.build_settings("Coverage")["VALIDATE_PRODUCT"].should == "NO"
+
     end
 
   end
