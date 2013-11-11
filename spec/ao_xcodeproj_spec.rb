@@ -85,6 +85,21 @@ describe "AO_Xcodeproj" do
       @main_target.build_settings("Coverage")["GCC_PREFIX_HEADER"].should == "#{@main_target.name}/#{@main_target.name}-Prefix.pch"
     end
 
+    it "should set Coverage Build Settings for the Test Target" do
+      @test_target.build_settings("Coverage")["PRODUCT_NAME"].should == "$(TARGET_NAME)"
+      @test_target.build_settings("Coverage")["WRAPPER_EXTENSION"].should == "xctest"
+      @test_target.build_settings("Coverage")["FRAMEWORK_SEARCH_PATHS"].should == ["$(SDKROOT)/Developer/Library/Frameworks", "$(inherited)", "$(DEVELOPER_FRAMEWORKS_DIR)"]
+      @test_target.build_settings("Coverage")["TEST_HOST"].should == "$(BUNDLE_LOADER)"
+      @test_target.build_settings("Coverage")["ARCHS"].should == "$(ARCHS_STANDARD_INCLUDING_64_BIT)"
+      @test_target.build_settings("Coverage")["GCC_PRECOMPILE_PREFIX_HEADER"].should == "YES"
+      @test_target.build_settings("Coverage")["BUNDLE_LOADER"].should == "$(BUILT_PRODUCTS_DIR)/#{@main_target.name}.app/#{@main_target.name}"
+      @test_target.build_settings("Coverage")["GCC_PREPROCESSOR_DEFINITIONS"].should == ["DEBUG=1", "COVERAGE=1"]
+      @test_target.build_settings("Coverage")["VALIDATE_PRODUCT"].should == "NO"
+      @test_target.build_settings("Coverage")["ENABLE_NS_ASSERTIONS"].should == "YES"
+      @test_target.build_settings("Coverage")["INFOPLIST_FILE"].should == "#{@test_target.name}/#{@test_target.name}-Info.plist"
+      @test_target.build_settings("Coverage")["GCC_PREFIX_HEADER"].should == "#{@main_target.name}/#{@main_target.name}-Prefix.pch"
+    end
+
   end
 
   describe "addCoverageScript" do
