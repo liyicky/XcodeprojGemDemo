@@ -77,7 +77,12 @@ describe "AO_Xcodeproj" do
 
     it "should set Coverage Build Settings for the Main Target" do
       @main_target.build_settings("Coverage")["PRODUCT_NAME"].should == "$(TARGET_NAME)"
-
+      @main_target.build_settings("Coverage")["WRAPPER_EXTENSION"].should == "app"
+      @main_target.build_settings("Coverage")["GCC_PRECOMPILE_PREFIX_HEADER"].should == "YES"
+      @main_target.build_settings("Coverage")["INFOPLIST_FILE"].should == "#{@main_target.name}/#{@main_target.name}-Info.plist"
+      @main_target.build_settings("Coverage")["ASSETCATALOG_COMPILER_APPICON_NAME"].should == "AppIcon"
+      @main_target.build_settings("Coverage")["ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME"].should == "LaunchImage"
+      @main_target.build_settings("Coverage")["GCC_PREFIX_HEADER"].should == "#{@main_target.name}/#{@main_target.name}-Prefix.pch"
     end
 
   end
