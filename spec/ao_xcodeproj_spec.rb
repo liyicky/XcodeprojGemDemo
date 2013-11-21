@@ -2,18 +2,21 @@ require 'spec_helper'
 
 describe "AO_Xcodeproj" do
 
-  before  do
+  before do
     include Spec_helper
+  end
+
+  before  do
     @project      = XcodeTestProj.new("TestingProject_wY0kK5cNi8", "TestingProject")
-    @xcproj       = @project.project
     @project_path = @project.project_path
     @root_path    = @project.root_path
-    @main_target  = @project.main_target
-    @test_target  = @project.test_target
   end
 
   after (:each) do
     @result       = nil
+    @project      = nil
+    @project_path = nil
+    @root_path    = nil
   end
 
   after do
@@ -63,43 +66,35 @@ describe "AO_Xcodeproj" do
           li = li.at(1).to_s()
           @result = li if (li == @script)
       end
+      debugger
       @result.should == @script
     end
 
-    it "should set Coverage Build Settings for the Project" do
-      @xcproj.build_settings("Coverage")["SDKROOT"].should == "iphoneos"
-      @xcproj.build_settings("Coverage")["ARCHS"].should == "$(ARCHS_STANDARD_INCLUDING_64_BIT)"
-      @xcproj.build_settings("Coverage")["IPHONEOS_DEPLOYMENT_TARGET"].should == "7.0"
-      @xcproj.build_settings("Coverage")["CLANG_WARN_ENUM_CONVERSION"].should == "YES"
+    it "should have GCC_GENERATE_TEST_COVERAGE_FILES and GCC_INSTRUMENT_PROGRAM_FLOW equal to NO" do
+      @project.project.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"].should == "NO"
+      @project.project.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"].should == "NO"
     end
 
-    it "should set Coverage Build Settings for the Main Target" do
-      @main_target.build_settings("Coverage")["GCC_GENERATE_TEST_COVERAGE_FILES"].should == "YES"
-      @main_target.build_settings("Coverage")["GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"].should == "YES"
-      @main_target.build_settings("Coverage")["PRODUCT_NAME"].should == "$(TARGET_NAME)"
-      @main_target.build_settings("Coverage")["WRAPPER_EXTENSION"].should == "app"
-      @main_target.build_settings("Coverage")["GCC_PRECOMPILE_PREFIX_HEADER"].should == "YES"
-      @main_target.build_settings("Coverage")["INFOPLIST_FILE"].should == "#{@main_target.name}/#{@main_target.name}-Info.plist"
-      @main_target.build_settings("Coverage")["ASSETCATALOG_COMPILER_APPICON_NAME"].should == "AppIcon"
-      @main_target.build_settings("Coverage")["ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME"].should == "LaunchImage"
-      @main_target.build_settings("Coverage")["GCC_PREFIX_HEADER"].should == "#{@main_target.name}/#{@main_target.name}-Prefix.pch"
-      @main_target.build_settings("Coverage")["GCC_PREPROCESSOR_DEFINITIONS"].should == ["DEBUG=1", "COVERAGE=1"]
+    it "should have SDKROOT equal to iphoneos" do
+      @project.project.build_settings("Coverage")["SDKROOT"].should == "iphoneos"
     end
 
-    it "should set Coverage Build Settings for the Test Target" do
-      @test_target.build_settings("Coverage")["PRODUCT_NAME"].should == "$(TARGET_NAME)"
-      @test_target.build_settings("Coverage")["WRAPPER_EXTENSION"].should == "xctest"
-      @test_target.build_settings("Coverage")["FRAMEWORK_SEARCH_PATHS"].should == ["$(SDKROOT)/Developer/Library/Frameworks", "$(inherited)", "$(DEVELOPER_FRAMEWORKS_DIR)"]
-      @test_target.build_settings("Coverage")["TEST_HOST"].should == "$(BUNDLE_LOADER)"
-      @test_target.build_settings("Coverage")["ARCHS"].should == "$(ARCHS_STANDARD_INCLUDING_64_BIT)"
-      @test_target.build_settings("Coverage")["GCC_PRECOMPILE_PREFIX_HEADER"].should == "YES"
-      @test_target.build_settings("Coverage")["BUNDLE_LOADER"].should == "$(BUILT_PRODUCTS_DIR)/#{@main_target.name}.app/#{@main_target.name}"
-      @test_target.build_settings("Coverage")["VALIDATE_PRODUCT"].should == "NO"
-      @test_target.build_settings("Coverage")["ENABLE_NS_ASSERTIONS"].should == "YES"
-      @test_target.build_settings("Coverage")["INFOPLIST_FILE"].should == "#{@test_target.name}/#{@test_target.name}-Info.plist"
-      @test_target.build_settings("Coverage")["GCC_PREFIX_HEADER"].should == "#{@main_target.name}/#{@main_target.name}-Prefix.pch"
+    it "should have ARCHS equal to ARCHS_STANDARD_INCLUDEING_64_BIT" do
+      @project.project.build_settings("Coverage")["ARCHS"].should == "$(ARCHS_STANDARD_INCLUDING_64_BIT)"
     end
 
+    it "should have FRAMEWORK_SEARCH_PATHS equal to the Debug Scheme's search paths" do
+      debug_search_paths =
+      @project.project.build_settings("Coverage")["FRAMEWORK_SEARCH_PATHS"].should == debug_search_paths
+    end
+
+    it "should have GCC_PREPROCESSOR_DEFINITIONS equal to COVERAGE=1" do
+      @project.project.build_settings("Coverage")["GCC_PREPROCESSOR_DEFINITIONS"].should == ["DEBUG=1", "COVERAGE=1"]
+    end
+
+    it "should IPHONE_DEVELOPMENT_TARGET equal to 7.0" do
+      @project.project.build_settings("Coverage")["IPHONEOS_DEPLOYMENT_TARGET"].should == "7.0"
+    end
   end
 
   describe "addCoverageScript" do
