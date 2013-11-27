@@ -25,11 +25,11 @@ class XcodeTestProj
       @root_path  = File.expand_path("..", @project_path)
     end
 
-    self.openProject
+    self.open_project
 
   end
 
-  def openProject
+  def open_project
 
     #Creates a new Xcodeproj
     if (@project_path.nil?)
@@ -59,12 +59,12 @@ class XcodeTestProj
     end
   end
 
-  def addTestTargets
+  def add_test_target
     @project.new_target(:bundle, "Coverage", :ios)
     @project.new_target(:bundle, "TestFlight", :ios)
   end
 
-  def addCoverageScheme(coverage_script=nil)
+  def add_coverage_scheme(coverage_script=nil)
     @coverage_script = coverage_script
     @coverage_script = "logfile=${SRCROOT}/bin/logfile.txt && exec > $logfile 2>&1 && /bin/sh ${SRCROOT}/bin/coverage.sh" if (@coverage_script.nil?)
     @coverage_scheme = Xcodeproj::XCScheme.new
@@ -86,16 +86,16 @@ class XcodeTestProj
     main_target_settings.each{|key, value| @main_target.build_settings("Coverage")[key] = value}
     test_target_settings.each{|key, value| @test_target.build_settings("Coverage")[key] = value}
 
-    buildCoverage = AO_scheme.new(@coverage_scheme, @main_target, @test_target, "Coverage")
-    buildCoverage.add_target
-    buildCoverage.test_action(@coverage_script)
-    buildCoverage.launch_action
-    buildCoverage.profile_action
-    buildCoverage.save(@project_path, "Coverage")
+    build_coverage = AO_scheme.new(@coverage_scheme, @main_target, @test_target, "Coverage")
+    build_coverage.add_target
+    build_coverage.test_action(@coverage_script)
+    build_coverage.launch_action
+    build_coverage.profile_action
+    build_coverage.save(@project_path, "Coverage")
 
   end
 
-  def addCoverageScript
+  def add_coverage_script
     @project.save
     bin_path = "#{@root_path}/bin"
     Dir.mkdir(bin_path) unless File.exist?(bin_path)
@@ -108,7 +108,7 @@ class XcodeTestProj
 
   end
 
-  def addVersioningScheme
+  def add_versioning_scheme
     @versioning_scheme = Xcodeproj::XCScheme.new
     @versioning_scheme.add_build_target(@main_target)
     @versioning_scheme.save_as(@project_path, "Versioning", false)
@@ -116,7 +116,7 @@ class XcodeTestProj
     @project.add_build_configuration("Versioning", :debug)
   end
 
-  def saveProject
+  def save_project
     @project.save
   end
 end

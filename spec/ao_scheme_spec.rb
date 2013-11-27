@@ -14,7 +14,7 @@ describe "AO_scheme" do
       @scheme       = Xcodeproj::XCScheme.new
       @main_target  = @project.project.new_target(:application, 'Main', :ios)
       @test_target  = @project.project.new_target(:application, 'Test', :ios)
-      @project.saveProject
+      @project.save_project
     end
 
     after (:each) do

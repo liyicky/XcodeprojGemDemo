@@ -23,14 +23,14 @@ describe "AO_Xcodeproj" do
     FileUtils.rm_rf("TestingProject_wY0kK5cNi8")
   end
 
-  describe "openProject" do
+  describe "open_project" do
 
   end
 
-  describe "addVersioningScheme" do
+  describe "add_versioning_scheme" do
 
     it "creates Versioning.xcscheme files" do
-      @project.addVersioningScheme
+      @project.add_versioning_scheme
 
       @result = Spec_helper::find_file_helper(@project_path, "/Versioning.xcscheme")
       versioning_exists = File.exist?(@result)
@@ -38,10 +38,10 @@ describe "AO_Xcodeproj" do
     end
   end
 
-  describe "addCoverageScheme" do
+  describe "add_coverage_scheme" do
 
     before do
-      @project.addCoverageScheme
+      @project.add_coverage_scheme
     end
 
     it "creates Coverage.xcscheme files" do
@@ -66,7 +66,6 @@ describe "AO_Xcodeproj" do
           li = li.at(1).to_s()
           @result = li if (li == @script)
       end
-      debugger
       @result.should == @script
     end
 
@@ -89,7 +88,7 @@ describe "AO_Xcodeproj" do
     end
 
     it "should have GCC_PREPROCESSOR_DEFINITIONS equal to COVERAGE=1" do
-      @project.project.build_settings("Coverage")["GCC_PREPROCESSOR_DEFINITIONS"].should == ["DEBUG=1", "COVERAGE=1"]
+      @project.main_target.build_settings("Coverage")["GCC_PREPROCESSOR_DEFINITIONS"].should == ["DEBUG=1", "COVERAGE=1"]
     end
 
     it "should IPHONE_DEVELOPMENT_TARGET equal to 7.0" do
@@ -97,10 +96,10 @@ describe "AO_Xcodeproj" do
     end
   end
 
-  describe "addCoverageScript" do
+  describe "add_coverage_script" do
 
     it "should have a bin in the projects root directory" do
-      @project.addCoverageScript
+      @project.add_coverage_script
 
       @result = Spec_helper::find_file_helper(@root_path, "/bin")
       bin_exists = File.exists?(@result)
@@ -108,7 +107,7 @@ describe "AO_Xcodeproj" do
     end
 
     it "should have coverage.sh in the project's bin" do
-      @project.addCoverageScript
+      @project.add_coverage_script
 
       @result = Spec_helper::find_file_helper(@root_path, "coverage.sh")
       script_exists = File.exists?(@result)
