@@ -111,6 +111,32 @@ class XcodeTestProj
     observer_path = "#{@root_path}/#{@test_target.name}/#{@test_target.name}Observer.m"
     FileUtils.mkdir_p(File.dirname(observer_path)) unless File.directory?(File.dirname(observer_path))
     observer = File.new(observer_path, "w+") && @test_target.add_file_references([@project.new_file(observer_path)]) unless File.exists? observer_path
+
+    File.open(observer_path, "w+") do |ln|
+      ln.puts "//"
+      ln.puts "// #{@test_target.name}Observer.m"
+      ln.puts "//"
+      ln.puts "// Created by Liygem on #{Date.today}"
+      ln.puts "//\n\n"
+      ln.puts "#ifdef COVERAGE \n\n"
+      ln.puts "#import <XCTest/XCTest.h> \n\n"
+      ln.puts "@interface #{@test_target.name}Observer : XCTestObserver"
+      ln.puts "@end \n\n"
+      ln.puts "@implementation #{@test_target.name}Observer \n\n"
+      ln.puts "+ (void)load"
+      ln.puts "{"
+      ln.puts "\t[[NSUserDefaults standardUserDefaults] setValue:@\"XCTestLog,#{@test_target.name}Observer\" forKey:XCTestObserverClassKey];"
+      ln.puts "} \n\n"
+      ln.puts "- (void)stopObserving"
+      ln.puts "{"
+      ln.puts "\t[super stopObserving];"
+      ln.puts "\tUIApplication *application = [UIApplication sharedApplication];"
+      ln.puts "\tid<UIApplicationDelegate> delegate = [application delegate];"
+      ln.puts "\t[delegate applicationWillResignActive:application];"
+      ln.puts "} \n\n"
+      ln.puts "@end \n\n"
+      ln.puts "#endif //COVERAGE"
+    end
     #@project.main_group.children.each { |i| @test_group = i if i.path == @test_target.name }
     #debugger
   end

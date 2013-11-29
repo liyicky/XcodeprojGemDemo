@@ -114,7 +114,7 @@ describe "AO_Xcodeproj" do
       @project.add_observer
     end
 
-    it "should add an observer file to the test group" do
+    it "should add an observer file to the project" do
       @result = Spec_helper::find_file_helper(@root_path, "#{@project.test_target.name}Observer.m")
       File.exists?(@result).should == true
     end
