@@ -93,6 +93,7 @@ class XcodeTestProj
     build_coverage.profile_action
     build_coverage.save(@project_path, "Coverage")
 
+    add_observer
   end
 
   def add_coverage_script
@@ -102,10 +103,16 @@ class XcodeTestProj
 
     input = "source /opt/boxen/env.sh\nCOV_PATH=${SRCROOT}/Coverage\nCOV_INFO=${COV_PATH}/Coverage.info\nOBJ_ARCH_PATH=${PROJECT_TEMP_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.build/Objects-normal/i386\n\nmkdir -p ${COV_PATH}\n/usr/bin/env lcov --capture -b ${SRCROOT} -d ${OBJ_ARCH_PATH} -o ${COV_INFO}\n/usr/bin/env lcov --remove ${COV_INFO} \"/Applications/Xcode.app/*\" -d ${OBJ_ARCH_PATH} -o ${COV_INFO}\n/usr/bin/env lcov --remove ${COV_INFO} \"main.m\" -d ${OBJ_ARCH_PATH} -o ${COV_INFO}\n\n/usr/bin/env genhtml --output-directory ${COV_PATH} ${COV_INFO}\n"
 
-
     script = File.new("#{bin_path}/coverage.sh", "w+")
     script.write(input)
+  end
 
+  def add_observer
+    observer_path = "#{@root_path}/#{@test_target.name}/#{@test_target.name}Observer.m"
+    FileUtils.mkdir_p(File.dirname(observer_path)) unless File.directory?(File.dirname(observer_path))
+    observer = File.new(observer_path, "w+") && @test_target.add_file_references([@project.new_file(observer_path)]) unless File.exists? observer_path
+    #@project.main_group.children.each { |i| @test_group = i if i.path == @test_target.name }
+    #debugger
   end
 
   def add_versioning_scheme

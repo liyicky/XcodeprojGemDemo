@@ -14,9 +14,6 @@ describe "AO_Xcodeproj" do
 
   after (:each) do
     @result       = nil
-    @project      = nil
-    @project_path = nil
-    @root_path    = nil
   end
 
   after do
@@ -33,8 +30,7 @@ describe "AO_Xcodeproj" do
       @project.add_versioning_scheme
 
       @result = Spec_helper::find_file_helper(@project_path, "/Versioning.xcscheme")
-      versioning_exists = File.exist?(@result)
-      versioning_exists.should == true
+      File.exist?(@result).should == true
     end
   end
 
@@ -46,8 +42,7 @@ describe "AO_Xcodeproj" do
 
     it "creates Coverage.xcscheme files" do
       @result = Spec_helper::find_file_helper(@project_path, "/Coverage.xcscheme")
-      coverage_exists = File.exists?(@result)
-      coverage_exists.should == true
+      File.exists?(@result).should == true
     end
 
 
@@ -102,16 +97,31 @@ describe "AO_Xcodeproj" do
       @project.add_coverage_script
 
       @result = Spec_helper::find_file_helper(@root_path, "/bin")
-      bin_exists = File.exists?(@result)
-      bin_exists.should == true
+      File.exists?(@result).should == true
     end
 
     it "should have coverage.sh in the project's bin" do
       @project.add_coverage_script
 
       @result = Spec_helper::find_file_helper(@root_path, "coverage.sh")
-      script_exists = File.exists?(@result)
-      script_exists.should == true
+      File.exists?(@result).should == true
+    end
+  end
+
+  describe "add_observer" do
+
+    before do
+      @project.add_observer
+    end
+
+    it "should add an observer file to the test group" do
+      @result = Spec_helper::find_file_helper(@root_path, "#{@project.test_target.name}Observer.m")
+      File.exists?(@result).should == true
+    end
+
+    it "should add a test directory if one doesn't exist" do
+      dir = "#{@root_path}/#{@project.test_target.name}"
+      File.directory?(dir).should == true
     end
   end
 
