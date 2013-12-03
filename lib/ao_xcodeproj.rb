@@ -14,6 +14,7 @@ class XcodeTestProj
   attr_accessor :coverage_script
   attr_accessor :main_target
   attr_accessor :test_target
+  attr_accessor :class_prefix
 
   def initialize(project_path=nil, project_name=nil)
     @project_path = project_path
@@ -26,7 +27,7 @@ class XcodeTestProj
     end
 
     self.open_project
-
+    @class_prefix = @project.objects[0].attributes["CLASSPREFIX"]
   end
 
   def open_project
@@ -66,16 +67,12 @@ class XcodeTestProj
 
   def add_coverage_scheme(coverage_script=nil)
     @coverage_script = coverage_script
-    @coverage_script = "logfile=${SRCROOT}/bin/logfile.txt && exec > $logfile 2>&1 && /bin/sh ${SRCROOT}/bin/coverage.sh" if (@coverage_script.nil?)
+    @coverage_script = "logfile=${SRCROOT}/bin/logfile.txt; exec > $logfile 2>&1; /bin/sh ${SRCROOT}/bin/coverage.sh" if (@coverage_script.nil?)
     @coverage_scheme = Xcodeproj::XCScheme.new
 
     project_settings     = {"CLANG_WARN_ENUM_CONVERSION"=>"YES", "GCC_WARN_UNUSED_VARIABLE"=>"YES", "GCC_WARN_ABOUT_RETURN_TYPE"=>"YES_ERROR", "GCC_PREPROCESSOR_DEFINITIONS"=>["DEBUG=1", "$(inherited)"], "ONLY_ACTIVE_ARCH"=>"YES", "CLANG_ENABLE_MODULES"=>"YES", "CLANG_CXX_LANGUAGE_STANDARD"=>"gnu++0x", "GCC_SYMBOLS_PRIVATE_EXTERN"=>"NO", "GCC_WARN_UNINITIALIZED_AUTOS"=>"YES", "CLANG_WARN_INT_CONVERSION"=>"YES", "CLANG_WARN_CONSTANT_CONVERSION"=>"YES", "GCC_OPTIMIZATION_LEVEL"=>"0", "GCC_C_LANGUAGE_STANDARD"=>"gnu99", "CLANG_WARN__DUPLICATE_METHOD_MATCH"=>"YES", "CLANG_WARN_EMPTY_BODY"=>"YES", "GCC_WARN_64_TO_32_BIT_CONVERSION"=>"YES", "ALWAYS_SEARCH_USER_PATHS"=>"NO", "CLANG_WARN_DIRECT_OBJC_ISA_USAGE"=>"YES_ERROR", "COPY_PHASE_STRIP"=>"NO", "CLANG_WARN_BOOL_CONVERSION"=>"YES", "CLANG_ENABLE_OBJC_ARC"=>"YES", "GCC_WARN_UNUSED_FUNCTION"=>"YES", "GCC_DYNAMIC_NO_PIC"=>"NO", "CLANG_WARN_OBJC_ROOT_CLASS"=>"YES_ERROR", "CODE_SIGN_IDENTITY[sdk=iphoneos*]"=>"iPhone Developer", "ARCHS"=>"$(ARCHS_STANDARD_INCLUDING_64_BIT)", "IPHONEOS_DEPLOYMENT_TARGET"=>"7.0", "SDKROOT"=>"iphoneos", "CLANG_CXX_LIBRARY"=>"libc++", "GCC_WARN_UNDECLARED_SELECTOR"=>"YES", "GCC_GENERATE_TEST_COVERAGE_FILES"=>"NO", "GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"=>"NO"}
-
-
-    main_target_settings = {"PRODUCT_NAME"=>"$(TARGET_NAME)", "WRAPPER_EXTENSION"=>"app", "GCC_PRECOMPILE_PREFIX_HEADER"=>"YES", "INFOPLIST_FILE"=>"#{@main_target.name}/#{@main_target.name}-Info.plist", "ASSETCATALOG_COMPILER_APPICON_NAME"=>"AppIcon", "ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME"=>"LaunchImage", "GCC_PREFIX_HEADER"=>"#{@main_target.name}/#{@main_target.name}-Prefix.pch", "GCC_GENERATE_TEST_COVERAGE_FILES"=>"YES", "GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"=>"YES", "GCC_PREPROCESSOR_DEFINITIONS"=>["DEBUG=1", "COVERAGE=1"]}
-
-
-    test_target_settings = {"PRODUCT_NAME"=>"$(TARGET_NAME)", "WRAPPER_EXTENSION"=>"xctest", "FRAMEWORK_SEARCH_PATHS"=>["$(SDKROOT)/Developer/Library/Frameworks", "$(inherited)", "$(DEVELOPER_FRAMEWORKS_DIR)"], "TEST_HOST"=>"$(BUNDLE_LOADER)", "ARCHS"=>"$(ARCHS_STANDARD_INCLUDING_64_BIT)", "GCC_PRECOMPILE_PREFIX_HEADER"=>"YES", "INFOPLIST_FILE"=>"#{@test_target.name}/#{@test_target.name}-Info.plist", "BUNDLE_LOADER"=>"$(BUILT_PRODUCTS_DIR)/#{@main_target.name}.app/#{@main_target.name}", "GCC_PREFIX_HEADER"=>"#{@main_target.name}/#{@main_target.name}-Prefix.pch", "VALIDATE_PRODUCT"=>"NO", "ENABLE_NS_ASSERTIONS"=>"YES", "INFOPLIST_FILE"=>"#{@test_target.name}/#{@test_target.name}-Info.plist" }
+    main_target_settings = {"PRODUCT_NAME"=>"$(TARGET_NAME)", "WRAPPER_EXTENSION"=>"app", "GCC_PRECOMPILE_PREFIX_HEADER"=>"YES", "INFOPLIST_FILE"=>"#{@main_target.name}/#{@main_target.name}-Info.plist", "ASSETCATALOG_COMPILER_APPICON_NAME"=>"AppIcon", "ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME"=>"LaunchImage", "GCC_PREFIX_HEADER"=>"#{@main_target.name}/#{@main_target.name}-Prefix.pch", "GCC_GENERATE_TEST_COVERAGE_FILES"=>"YES", "GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"=>"YES", "GCC_PREPROCESSOR_DEFINITIONS"=>["$(inherited)", "COVERAGE=1"]}
+    test_target_settings = {"PRODUCT_NAME"=>"$(TARGET_NAME)", "WRAPPER_EXTENSION"=>"xctest", "FRAMEWORK_SEARCH_PATHS"=>["$(SDKROOT)/Developer/Library/Frameworks", "$(inherited)", "$(DEVELOPER_FRAMEWORKS_DIR)"], "TEST_HOST"=>"$(BUNDLE_LOADER)", "ARCHS"=>"$(ARCHS_STANDARD_INCLUDING_64_BIT)", "GCC_PRECOMPILE_PREFIX_HEADER"=>"YES", "INFOPLIST_FILE"=>"#{@test_target.name}/#{@test_target.name}-Info.plist", "BUNDLE_LOADER"=>"$(BUILT_PRODUCTS_DIR)/#{@main_target.name}.app/#{@main_target.name}", "GCC_PREFIX_HEADER"=>"#{@main_target.name}/#{@main_target.name}-Prefix.pch", "VALIDATE_PRODUCT"=>"NO", "ENABLE_NS_ASSERTIONS"=>"YES", "INFOPLIST_FILE"=>"#{@test_target.name}/#{@test_target.name}-Info.plist", "GCC_PREPROCESSOR_DEFINITIONS"=>["$(inherited)", "COVERAGE=1"]}
 
 
     @project.add_build_configuration("Coverage", :debug)
@@ -94,6 +91,7 @@ class XcodeTestProj
     build_coverage.save(@project_path, "Coverage")
 
     add_observer
+    add_gcov_flush
   end
 
   def add_coverage_script
@@ -139,6 +137,31 @@ class XcodeTestProj
     end
     #@project.main_group.children.each { |i| @test_group = i if i.path == @test_target.name }
     #debugger
+  end
+
+  def add_gcov_flush
+    line_number              = 0
+    app_delegate_path        = "#{@root_path}/#{@main_target.name}/#{@class_prefix}AppDelegate.m"
+    new_application_delegate = File.new("#{app_delegate_path}.tmp", "w+")
+    old_application_delegate = File.open(app_delegate_path, "r+") do |file|
+      file.each_line do |ln|
+        line_number+=1
+        puts line_number
+        new_application_delegate << ln
+        if ln.strip == "- (void)applicationWillResignActive:(UIApplication *)application"
+          new_application_delegate.puts "#ifdef COVERAGE //This was added for Unit Testing on #{Date.today}"
+          new_application_delegate.puts "\t__gcov_flush();"
+          new_application_delegate.puts "#endif //COVERAGE"
+        end
+      end
+    end
+
+    old_application_delegate = File.open(app_delegate_path, "r+") do |file|
+      file.lines.drop(line_number)
+        file.each_line do |ln|
+          new_application_delegate << ln
+      end
+    end
   end
 
   def add_versioning_scheme

@@ -83,7 +83,7 @@ describe "AO_Xcodeproj" do
     end
 
     it "should have GCC_PREPROCESSOR_DEFINITIONS equal to COVERAGE=1" do
-      @project.main_target.build_settings("Coverage")["GCC_PREPROCESSOR_DEFINITIONS"].should == ["DEBUG=1", "COVERAGE=1"]
+      @project.main_target.build_settings("Coverage")["GCC_PREPROCESSOR_DEFINITIONS"].should == ["$(inherited)", "COVERAGE=1"]
     end
 
     it "should IPHONE_DEVELOPMENT_TARGET equal to 7.0" do
@@ -123,6 +123,24 @@ describe "AO_Xcodeproj" do
       dir = "#{@root_path}/#{@project.test_target.name}"
       File.directory?(dir).should == true
     end
+  end
+
+  describe "add_gcov_flush" do
+    before do
+      @project.add_gcov_flush
+    end
+    it "should add gcov_flush() to the application's delegate" do
+      app_delegate = File.open("#{@root_path}/#{@project.main_target.name}/#{@project.class_prefix}AppDelegate").read
+      if app_delegate == "- (void)applicationWillResignActive:(UIApplication *)application" then app_delegate do |ln|
+        ln.readline
+        ln.readline
+        ln.should == "#ifdef COVERAGE"
+        ln.should == "\t__gcov_flush();"
+        ln.should == "#endif"
+        end
+      end
+    end
+
   end
 
 end

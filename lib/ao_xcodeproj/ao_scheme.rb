@@ -7,13 +7,9 @@ class AO_scheme
     @main_target = main_target
     @test_target = test_target
     @config      = config
-
-    # @scheme.add_build_target(@main_target)
-    # @scheme.add_build_target(@test_target)
   end
 
   def add_target(target=@main_target)
-
     build_action = @scheme.doc.root.elements['BuildAction']
     build_action_entries = build_action.add_element("BuildActionEntries")
 
@@ -25,14 +21,12 @@ class AO_scheme
     build_action_entry.attributes['buildForAnalyzing']    = 'YES'
 
     buildable_reference(build_action_entry, "app")
-
   end
 
   def buildable_reference(element, type, macro_exp=false)
     target = (@main_target if type == "app") || (@test_target if type == "xctest")
     type = ("#{@main_target.name}.app" if type == "app") || ("#{@test_target.name}.xctest" if type == "xctest")
     buildable_reference = (element.add_element('BuildableReference') if macro_exp == false) || (element.add_element('MacroExpansion').add_element('BuildableReference') if macro_exp == true)
-
 
     buildable_reference.attributes['BuildableIdentifier'] = 'primary'
     buildable_reference.attributes['BlueprintIdentifier'] = target.uuid
@@ -51,7 +45,6 @@ class AO_scheme
     ta_testable_reference = ta_testables.add_element('TestableReference')
     ta_testable_reference.attributes['skipped'] = 'NO'
     buildable_reference(ta_testable_reference, "xctest")
-
 
     ta_post_action = ta.add_element("PostActions")
     ta_execute_action = ta_post_action.add_element("ExecutionAction")
