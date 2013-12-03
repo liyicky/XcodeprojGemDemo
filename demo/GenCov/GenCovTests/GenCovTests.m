@@ -2,7 +2,7 @@
 //  GenCovTests.m
 //  GenCovTests
 //
-//  Created by Jason Cheladyn on 12/2/13.
+//  Created by Jason Cheladyn on 12/3/13.
 //  Copyright (c) 2013 Jason Cheladyn. All rights reserved.
 //
 

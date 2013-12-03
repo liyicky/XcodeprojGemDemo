@@ -7,152 +7,152 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7BA060E9184D2CDE004B3D59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA060E8184D2CDE004B3D59 /* Foundation.framework */; };
-		7BA060EB184D2CDE004B3D59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA060EA184D2CDE004B3D59 /* CoreGraphics.framework */; };
-		7BA060ED184D2CDE004B3D59 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA060EC184D2CDE004B3D59 /* UIKit.framework */; };
-		7BA060F3184D2CDE004B3D59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BA060F1184D2CDE004B3D59 /* InfoPlist.strings */; };
-		7BA060F5184D2CDE004B3D59 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA060F4184D2CDE004B3D59 /* main.m */; };
-		7BA060F9184D2CDE004B3D59 /* TCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA060F8184D2CDE004B3D59 /* TCAppDelegate.m */; };
-		7BA060FC184D2CDE004B3D59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BA060FA184D2CDE004B3D59 /* Main.storyboard */; };
-		7BA060FF184D2CDE004B3D59 /* TCMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA060FE184D2CDE004B3D59 /* TCMasterViewController.m */; };
-		7BA06102184D2CDE004B3D59 /* TCDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA06101184D2CDE004B3D59 /* TCDetailViewController.m */; };
-		7BA06104184D2CDE004B3D59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BA06103184D2CDE004B3D59 /* Images.xcassets */; };
-		7BA0610B184D2CDE004B3D59 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA0610A184D2CDE004B3D59 /* XCTest.framework */; };
-		7BA0610C184D2CDE004B3D59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA060E8184D2CDE004B3D59 /* Foundation.framework */; };
-		7BA0610D184D2CDE004B3D59 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA060EC184D2CDE004B3D59 /* UIKit.framework */; };
-		7BA06115184D2CDE004B3D59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BA06113184D2CDE004B3D59 /* InfoPlist.strings */; };
-		7BA06117184D2CDE004B3D59 /* GenCovTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA06116184D2CDE004B3D59 /* GenCovTests.m */; };
+		7BA06171184E3A9A004B3D59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA06170184E3A9A004B3D59 /* Foundation.framework */; };
+		7BA06173184E3A9A004B3D59 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA06172184E3A9A004B3D59 /* CoreGraphics.framework */; };
+		7BA06175184E3A9A004B3D59 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA06174184E3A9A004B3D59 /* UIKit.framework */; };
+		7BA0617B184E3A9A004B3D59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BA06179184E3A9A004B3D59 /* InfoPlist.strings */; };
+		7BA0617D184E3A9A004B3D59 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0617C184E3A9A004B3D59 /* main.m */; };
+		7BA06181184E3A9A004B3D59 /* TCAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA06180184E3A9A004B3D59 /* TCAppDelegate.m */; };
+		7BA06184184E3A9A004B3D59 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7BA06182184E3A9A004B3D59 /* Main.storyboard */; };
+		7BA06187184E3A9A004B3D59 /* TCMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA06186184E3A9A004B3D59 /* TCMasterViewController.m */; };
+		7BA0618A184E3A9A004B3D59 /* TCDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA06189184E3A9A004B3D59 /* TCDetailViewController.m */; };
+		7BA0618C184E3A9A004B3D59 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0618B184E3A9A004B3D59 /* Images.xcassets */; };
+		7BA06193184E3A9A004B3D59 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA06192184E3A9A004B3D59 /* XCTest.framework */; };
+		7BA06194184E3A9A004B3D59 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA06170184E3A9A004B3D59 /* Foundation.framework */; };
+		7BA06195184E3A9A004B3D59 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7BA06174184E3A9A004B3D59 /* UIKit.framework */; };
+		7BA0619D184E3A9A004B3D59 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7BA0619B184E3A9A004B3D59 /* InfoPlist.strings */; };
+		7BA0619F184E3A9A004B3D59 /* GenCovTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BA0619E184E3A9A004B3D59 /* GenCovTests.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7BA0610E184D2CDE004B3D59 /* PBXContainerItemProxy */ = {
+		7BA06196184E3A9A004B3D59 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 7BA060DD184D2CDE004B3D59 /* Project object */;
+			containerPortal = 7BA06165184E3A9A004B3D59 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 7BA060E4184D2CDE004B3D59;
+			remoteGlobalIDString = 7BA0616C184E3A9A004B3D59;
 			remoteInfo = GenCov;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		7BA060E5184D2CDE004B3D59 /* GenCov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenCov.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BA060E8184D2CDE004B3D59 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		7BA060EA184D2CDE004B3D59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		7BA060EC184D2CDE004B3D59 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		7BA060F0184D2CDE004B3D59 /* GenCov-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GenCov-Info.plist"; sourceTree = "<group>"; };
-		7BA060F2184D2CDE004B3D59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7BA060F4184D2CDE004B3D59 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		7BA060F6184D2CDE004B3D59 /* GenCov-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GenCov-Prefix.pch"; sourceTree = "<group>"; };
-		7BA060F7184D2CDE004B3D59 /* TCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCAppDelegate.h; sourceTree = "<group>"; };
-		7BA060F8184D2CDE004B3D59 /* TCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCAppDelegate.m; sourceTree = "<group>"; };
-		7BA060FB184D2CDE004B3D59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		7BA060FD184D2CDE004B3D59 /* TCMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCMasterViewController.h; sourceTree = "<group>"; };
-		7BA060FE184D2CDE004B3D59 /* TCMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCMasterViewController.m; sourceTree = "<group>"; };
-		7BA06100184D2CDE004B3D59 /* TCDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCDetailViewController.h; sourceTree = "<group>"; };
-		7BA06101184D2CDE004B3D59 /* TCDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCDetailViewController.m; sourceTree = "<group>"; };
-		7BA06103184D2CDE004B3D59 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		7BA06109184D2CDE004B3D59 /* GenCovTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenCovTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7BA0610A184D2CDE004B3D59 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		7BA06112184D2CDE004B3D59 /* GenCovTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GenCovTests-Info.plist"; sourceTree = "<group>"; };
-		7BA06114184D2CDE004B3D59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7BA06116184D2CDE004B3D59 /* GenCovTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenCovTests.m; sourceTree = "<group>"; };
+		7BA0616D184E3A9A004B3D59 /* GenCov.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GenCov.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BA06170184E3A9A004B3D59 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7BA06172184E3A9A004B3D59 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		7BA06174184E3A9A004B3D59 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		7BA06178184E3A9A004B3D59 /* GenCov-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GenCov-Info.plist"; sourceTree = "<group>"; };
+		7BA0617A184E3A9A004B3D59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7BA0617C184E3A9A004B3D59 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		7BA0617E184E3A9A004B3D59 /* GenCov-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GenCov-Prefix.pch"; sourceTree = "<group>"; };
+		7BA0617F184E3A9A004B3D59 /* TCAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCAppDelegate.h; sourceTree = "<group>"; };
+		7BA06180184E3A9A004B3D59 /* TCAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCAppDelegate.m; sourceTree = "<group>"; };
+		7BA06183184E3A9A004B3D59 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		7BA06185184E3A9A004B3D59 /* TCMasterViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCMasterViewController.h; sourceTree = "<group>"; };
+		7BA06186184E3A9A004B3D59 /* TCMasterViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCMasterViewController.m; sourceTree = "<group>"; };
+		7BA06188184E3A9A004B3D59 /* TCDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCDetailViewController.h; sourceTree = "<group>"; };
+		7BA06189184E3A9A004B3D59 /* TCDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCDetailViewController.m; sourceTree = "<group>"; };
+		7BA0618B184E3A9A004B3D59 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		7BA06191184E3A9A004B3D59 /* GenCovTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GenCovTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BA06192184E3A9A004B3D59 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		7BA0619A184E3A9A004B3D59 /* GenCovTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GenCovTests-Info.plist"; sourceTree = "<group>"; };
+		7BA0619C184E3A9A004B3D59 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7BA0619E184E3A9A004B3D59 /* GenCovTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GenCovTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7BA060E2184D2CDE004B3D59 /* Frameworks */ = {
+		7BA0616A184E3A9A004B3D59 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BA060EB184D2CDE004B3D59 /* CoreGraphics.framework in Frameworks */,
-				7BA060ED184D2CDE004B3D59 /* UIKit.framework in Frameworks */,
-				7BA060E9184D2CDE004B3D59 /* Foundation.framework in Frameworks */,
+				7BA06173184E3A9A004B3D59 /* CoreGraphics.framework in Frameworks */,
+				7BA06175184E3A9A004B3D59 /* UIKit.framework in Frameworks */,
+				7BA06171184E3A9A004B3D59 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7BA06106184D2CDE004B3D59 /* Frameworks */ = {
+		7BA0618E184E3A9A004B3D59 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BA0610B184D2CDE004B3D59 /* XCTest.framework in Frameworks */,
-				7BA0610D184D2CDE004B3D59 /* UIKit.framework in Frameworks */,
-				7BA0610C184D2CDE004B3D59 /* Foundation.framework in Frameworks */,
+				7BA06193184E3A9A004B3D59 /* XCTest.framework in Frameworks */,
+				7BA06195184E3A9A004B3D59 /* UIKit.framework in Frameworks */,
+				7BA06194184E3A9A004B3D59 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7BA060DC184D2CDE004B3D59 = {
+		7BA06164184E3A9A004B3D59 = {
 			isa = PBXGroup;
 			children = (
-				7BA060EE184D2CDE004B3D59 /* GenCov */,
-				7BA06110184D2CDE004B3D59 /* GenCovTests */,
-				7BA060E7184D2CDE004B3D59 /* Frameworks */,
-				7BA060E6184D2CDE004B3D59 /* Products */,
+				7BA06176184E3A9A004B3D59 /* GenCov */,
+				7BA06198184E3A9A004B3D59 /* GenCovTests */,
+				7BA0616F184E3A9A004B3D59 /* Frameworks */,
+				7BA0616E184E3A9A004B3D59 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		7BA060E6184D2CDE004B3D59 /* Products */ = {
+		7BA0616E184E3A9A004B3D59 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7BA060E5184D2CDE004B3D59 /* GenCov.app */,
-				7BA06109184D2CDE004B3D59 /* GenCovTests.xctest */,
+				7BA0616D184E3A9A004B3D59 /* GenCov.app */,
+				7BA06191184E3A9A004B3D59 /* GenCovTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7BA060E7184D2CDE004B3D59 /* Frameworks */ = {
+		7BA0616F184E3A9A004B3D59 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7BA060E8184D2CDE004B3D59 /* Foundation.framework */,
-				7BA060EA184D2CDE004B3D59 /* CoreGraphics.framework */,
-				7BA060EC184D2CDE004B3D59 /* UIKit.framework */,
-				7BA0610A184D2CDE004B3D59 /* XCTest.framework */,
+				7BA06170184E3A9A004B3D59 /* Foundation.framework */,
+				7BA06172184E3A9A004B3D59 /* CoreGraphics.framework */,
+				7BA06174184E3A9A004B3D59 /* UIKit.framework */,
+				7BA06192184E3A9A004B3D59 /* XCTest.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7BA060EE184D2CDE004B3D59 /* GenCov */ = {
+		7BA06176184E3A9A004B3D59 /* GenCov */ = {
 			isa = PBXGroup;
 			children = (
-				7BA060F7184D2CDE004B3D59 /* TCAppDelegate.h */,
-				7BA060F8184D2CDE004B3D59 /* TCAppDelegate.m */,
-				7BA060FA184D2CDE004B3D59 /* Main.storyboard */,
-				7BA060FD184D2CDE004B3D59 /* TCMasterViewController.h */,
-				7BA060FE184D2CDE004B3D59 /* TCMasterViewController.m */,
-				7BA06100184D2CDE004B3D59 /* TCDetailViewController.h */,
-				7BA06101184D2CDE004B3D59 /* TCDetailViewController.m */,
-				7BA06103184D2CDE004B3D59 /* Images.xcassets */,
-				7BA060EF184D2CDE004B3D59 /* Supporting Files */,
+				7BA0617F184E3A9A004B3D59 /* TCAppDelegate.h */,
+				7BA06180184E3A9A004B3D59 /* TCAppDelegate.m */,
+				7BA06182184E3A9A004B3D59 /* Main.storyboard */,
+				7BA06185184E3A9A004B3D59 /* TCMasterViewController.h */,
+				7BA06186184E3A9A004B3D59 /* TCMasterViewController.m */,
+				7BA06188184E3A9A004B3D59 /* TCDetailViewController.h */,
+				7BA06189184E3A9A004B3D59 /* TCDetailViewController.m */,
+				7BA0618B184E3A9A004B3D59 /* Images.xcassets */,
+				7BA06177184E3A9A004B3D59 /* Supporting Files */,
 			);
 			path = GenCov;
 			sourceTree = "<group>";
 		};
-		7BA060EF184D2CDE004B3D59 /* Supporting Files */ = {
+		7BA06177184E3A9A004B3D59 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7BA060F0184D2CDE004B3D59 /* GenCov-Info.plist */,
-				7BA060F1184D2CDE004B3D59 /* InfoPlist.strings */,
-				7BA060F4184D2CDE004B3D59 /* main.m */,
-				7BA060F6184D2CDE004B3D59 /* GenCov-Prefix.pch */,
+				7BA06178184E3A9A004B3D59 /* GenCov-Info.plist */,
+				7BA06179184E3A9A004B3D59 /* InfoPlist.strings */,
+				7BA0617C184E3A9A004B3D59 /* main.m */,
+				7BA0617E184E3A9A004B3D59 /* GenCov-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7BA06110184D2CDE004B3D59 /* GenCovTests */ = {
+		7BA06198184E3A9A004B3D59 /* GenCovTests */ = {
 			isa = PBXGroup;
 			children = (
-				7BA06116184D2CDE004B3D59 /* GenCovTests.m */,
-				7BA06111184D2CDE004B3D59 /* Supporting Files */,
+				7BA0619E184E3A9A004B3D59 /* GenCovTests.m */,
+				7BA06199184E3A9A004B3D59 /* Supporting Files */,
 			);
 			path = GenCovTests;
 			sourceTree = "<group>";
 		};
-		7BA06111184D2CDE004B3D59 /* Supporting Files */ = {
+		7BA06199184E3A9A004B3D59 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7BA06112184D2CDE004B3D59 /* GenCovTests-Info.plist */,
-				7BA06113184D2CDE004B3D59 /* InfoPlist.strings */,
+				7BA0619A184E3A9A004B3D59 /* GenCovTests-Info.plist */,
+				7BA0619B184E3A9A004B3D59 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -160,13 +160,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7BA060E4184D2CDE004B3D59 /* GenCov */ = {
+		7BA0616C184E3A9A004B3D59 /* GenCov */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7BA0611A184D2CDE004B3D59 /* Build configuration list for PBXNativeTarget "GenCov" */;
+			buildConfigurationList = 7BA061A2184E3A9A004B3D59 /* Build configuration list for PBXNativeTarget "GenCov" */;
 			buildPhases = (
-				7BA060E1184D2CDE004B3D59 /* Sources */,
-				7BA060E2184D2CDE004B3D59 /* Frameworks */,
-				7BA060E3184D2CDE004B3D59 /* Resources */,
+				7BA06169184E3A9A004B3D59 /* Sources */,
+				7BA0616A184E3A9A004B3D59 /* Frameworks */,
+				7BA0616B184E3A9A004B3D59 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -174,43 +174,43 @@
 			);
 			name = GenCov;
 			productName = GenCov;
-			productReference = 7BA060E5184D2CDE004B3D59 /* GenCov.app */;
+			productReference = 7BA0616D184E3A9A004B3D59 /* GenCov.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7BA06108184D2CDE004B3D59 /* GenCovTests */ = {
+		7BA06190184E3A9A004B3D59 /* GenCovTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7BA0611D184D2CDE004B3D59 /* Build configuration list for PBXNativeTarget "GenCovTests" */;
+			buildConfigurationList = 7BA061A5184E3A9A004B3D59 /* Build configuration list for PBXNativeTarget "GenCovTests" */;
 			buildPhases = (
-				7BA06105184D2CDE004B3D59 /* Sources */,
-				7BA06106184D2CDE004B3D59 /* Frameworks */,
-				7BA06107184D2CDE004B3D59 /* Resources */,
+				7BA0618D184E3A9A004B3D59 /* Sources */,
+				7BA0618E184E3A9A004B3D59 /* Frameworks */,
+				7BA0618F184E3A9A004B3D59 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7BA0610F184D2CDE004B3D59 /* PBXTargetDependency */,
+				7BA06197184E3A9A004B3D59 /* PBXTargetDependency */,
 			);
 			name = GenCovTests;
 			productName = GenCovTests;
-			productReference = 7BA06109184D2CDE004B3D59 /* GenCovTests.xctest */;
+			productReference = 7BA06191184E3A9A004B3D59 /* GenCovTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		7BA060DD184D2CDE004B3D59 /* Project object */ = {
+		7BA06165184E3A9A004B3D59 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = TC;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "Jason Cheladyn";
 				TargetAttributes = {
-					7BA06108184D2CDE004B3D59 = {
-						TestTargetID = 7BA060E4184D2CDE004B3D59;
+					7BA06190184E3A9A004B3D59 = {
+						TestTargetID = 7BA0616C184E3A9A004B3D59;
 					};
 				};
 			};
-			buildConfigurationList = 7BA060E0184D2CDE004B3D59 /* Build configuration list for PBXProject "GenCov" */;
+			buildConfigurationList = 7BA06168184E3A9A004B3D59 /* Build configuration list for PBXProject "GenCov" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -218,89 +218,89 @@
 				en,
 				Base,
 			);
-			mainGroup = 7BA060DC184D2CDE004B3D59;
-			productRefGroup = 7BA060E6184D2CDE004B3D59 /* Products */;
+			mainGroup = 7BA06164184E3A9A004B3D59;
+			productRefGroup = 7BA0616E184E3A9A004B3D59 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7BA060E4184D2CDE004B3D59 /* GenCov */,
-				7BA06108184D2CDE004B3D59 /* GenCovTests */,
+				7BA0616C184E3A9A004B3D59 /* GenCov */,
+				7BA06190184E3A9A004B3D59 /* GenCovTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7BA060E3184D2CDE004B3D59 /* Resources */ = {
+		7BA0616B184E3A9A004B3D59 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BA06104184D2CDE004B3D59 /* Images.xcassets in Resources */,
-				7BA060F3184D2CDE004B3D59 /* InfoPlist.strings in Resources */,
-				7BA060FC184D2CDE004B3D59 /* Main.storyboard in Resources */,
+				7BA0618C184E3A9A004B3D59 /* Images.xcassets in Resources */,
+				7BA0617B184E3A9A004B3D59 /* InfoPlist.strings in Resources */,
+				7BA06184184E3A9A004B3D59 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7BA06107184D2CDE004B3D59 /* Resources */ = {
+		7BA0618F184E3A9A004B3D59 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BA06115184D2CDE004B3D59 /* InfoPlist.strings in Resources */,
+				7BA0619D184E3A9A004B3D59 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7BA060E1184D2CDE004B3D59 /* Sources */ = {
+		7BA06169184E3A9A004B3D59 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BA06102184D2CDE004B3D59 /* TCDetailViewController.m in Sources */,
-				7BA060FF184D2CDE004B3D59 /* TCMasterViewController.m in Sources */,
-				7BA060F5184D2CDE004B3D59 /* main.m in Sources */,
-				7BA060F9184D2CDE004B3D59 /* TCAppDelegate.m in Sources */,
+				7BA0618A184E3A9A004B3D59 /* TCDetailViewController.m in Sources */,
+				7BA06187184E3A9A004B3D59 /* TCMasterViewController.m in Sources */,
+				7BA0617D184E3A9A004B3D59 /* main.m in Sources */,
+				7BA06181184E3A9A004B3D59 /* TCAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7BA06105184D2CDE004B3D59 /* Sources */ = {
+		7BA0618D184E3A9A004B3D59 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7BA06117184D2CDE004B3D59 /* GenCovTests.m in Sources */,
+				7BA0619F184E3A9A004B3D59 /* GenCovTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7BA0610F184D2CDE004B3D59 /* PBXTargetDependency */ = {
+		7BA06197184E3A9A004B3D59 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7BA060E4184D2CDE004B3D59 /* GenCov */;
-			targetProxy = 7BA0610E184D2CDE004B3D59 /* PBXContainerItemProxy */;
+			target = 7BA0616C184E3A9A004B3D59 /* GenCov */;
+			targetProxy = 7BA06196184E3A9A004B3D59 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		7BA060F1184D2CDE004B3D59 /* InfoPlist.strings */ = {
+		7BA06179184E3A9A004B3D59 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7BA060F2184D2CDE004B3D59 /* en */,
+				7BA0617A184E3A9A004B3D59 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
-		7BA060FA184D2CDE004B3D59 /* Main.storyboard */ = {
+		7BA06182184E3A9A004B3D59 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7BA060FB184D2CDE004B3D59 /* Base */,
+				7BA06183184E3A9A004B3D59 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		7BA06113184D2CDE004B3D59 /* InfoPlist.strings */ = {
+		7BA0619B184E3A9A004B3D59 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7BA06114184D2CDE004B3D59 /* en */,
+				7BA0619C184E3A9A004B3D59 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -308,7 +308,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7BA06118184D2CDE004B3D59 /* Debug */ = {
+		7BA061A0184E3A9A004B3D59 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -347,7 +347,7 @@
 			};
 			name = Debug;
 		};
-		7BA06119184D2CDE004B3D59 /* Release */ = {
+		7BA061A1184E3A9A004B3D59 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -380,7 +380,7 @@
 			};
 			name = Release;
 		};
-		7BA0611B184D2CDE004B3D59 /* Debug */ = {
+		7BA061A3184E3A9A004B3D59 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -393,7 +393,7 @@
 			};
 			name = Debug;
 		};
-		7BA0611C184D2CDE004B3D59 /* Release */ = {
+		7BA061A4184E3A9A004B3D59 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -406,7 +406,7 @@
 			};
 			name = Release;
 		};
-		7BA0611E184D2CDE004B3D59 /* Debug */ = {
+		7BA061A6184E3A9A004B3D59 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
@@ -429,7 +429,7 @@
 			};
 			name = Debug;
 		};
-		7BA0611F184D2CDE004B3D59 /* Release */ = {
+		7BA061A7184E3A9A004B3D59 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
@@ -451,32 +451,32 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7BA060E0184D2CDE004B3D59 /* Build configuration list for PBXProject "GenCov" */ = {
+		7BA06168184E3A9A004B3D59 /* Build configuration list for PBXProject "GenCov" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7BA06118184D2CDE004B3D59 /* Debug */,
-				7BA06119184D2CDE004B3D59 /* Release */,
+				7BA061A0184E3A9A004B3D59 /* Debug */,
+				7BA061A1184E3A9A004B3D59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7BA0611A184D2CDE004B3D59 /* Build configuration list for PBXNativeTarget "GenCov" */ = {
+		7BA061A2184E3A9A004B3D59 /* Build configuration list for PBXNativeTarget "GenCov" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7BA0611B184D2CDE004B3D59 /* Debug */,
-				7BA0611C184D2CDE004B3D59 /* Release */,
+				7BA061A3184E3A9A004B3D59 /* Debug */,
+				7BA061A4184E3A9A004B3D59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
-		7BA0611D184D2CDE004B3D59 /* Build configuration list for PBXNativeTarget "GenCovTests" */ = {
+		7BA061A5184E3A9A004B3D59 /* Build configuration list for PBXNativeTarget "GenCovTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7BA0611E184D2CDE004B3D59 /* Debug */,
-				7BA0611F184D2CDE004B3D59 /* Release */,
+				7BA061A6184E3A9A004B3D59 /* Debug */,
+				7BA061A7184E3A9A004B3D59 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 7BA060DD184D2CDE004B3D59 /* Project object */;
+	rootObject = 7BA06165184E3A9A004B3D59 /* Project object */;
 }

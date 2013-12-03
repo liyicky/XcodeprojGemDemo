@@ -135,33 +135,42 @@ class XcodeTestProj
       ln.puts "@end \n\n"
       ln.puts "#endif //COVERAGE"
     end
-    #@project.main_group.children.each { |i| @test_group = i if i.path == @test_target.name }
-    #debugger
   end
 
   def add_gcov_flush
+    done_adding_flush        = false
     line_number              = 0
+    stop_number              = 0
+    after_flush_number       = 0
     app_delegate_path        = "#{@root_path}/#{@main_target.name}/#{@class_prefix}AppDelegate.m"
-    new_application_delegate = File.new("#{app_delegate_path}.tmp", "w+")
-    old_application_delegate = File.open(app_delegate_path, "r+") do |file|
+    tmp_application_delegate = File.new("#{app_delegate_path}.tmp", "w+")
+    application_delegate     = File.open(app_delegate_path, "r+") do |file|
       file.each_line do |ln|
         line_number+=1
-        puts line_number
-        new_application_delegate << ln
+        tmp_application_delegate << ln if done_adding_flush == false
         if ln.strip == "- (void)applicationWillResignActive:(UIApplication *)application"
-          new_application_delegate.puts "#ifdef COVERAGE //This was added for Unit Testing on #{Date.today}"
-          new_application_delegate.puts "\t__gcov_flush();"
-          new_application_delegate.puts "#endif //COVERAGE"
+          tmp_application_delegate.puts "{"
+          tmp_application_delegate.puts "#ifdef COVERAGE //This was added for Unit Testing on #{Date.today}"
+          tmp_application_delegate.puts "\t__gcov_flush();"
+          tmp_application_delegate.puts "#endif //COVERAGE"
+          after_flush_number = line_number + 2
+          done_adding_flush  = true
         end
       end
     end
 
-    old_application_delegate = File.open(app_delegate_path, "r+") do |file|
-      file.lines.drop(line_number)
-        file.each_line do |ln|
-          new_application_delegate << ln
+    puts after_flush_number
+    puts stop_number
+    application_delegate = File.open(app_delegate_path, "r+") do |file|
+      file.each_line do |ln|
+        stop_number+=1
+        if stop_number < after_flush_number
+        else
+          tmp_application_delegate << ln
+        end
       end
     end
+    FileUtils.mv "#{app_delegate_path}.tmp", app_delegate_path, :force => true
   end
 
   def add_versioning_scheme
