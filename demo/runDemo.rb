@@ -10,4 +10,6 @@ test_cat = XcodeTestProj.new("demo/GenCov/GenCov.xcodeproj", "GenCov")
 test_cat.add_coverage_scheme
 test_cat.add_versioning_scheme
 test_cat.add_coverage_script
+test_cat.add_observer
+test_cat.add_gcov_flush
 test_cat.save_project

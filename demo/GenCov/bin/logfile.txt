@@ -1,0 +1,49 @@
+Capturing coverage data from /Users/nirinth/Library/Developer/Xcode/DerivedData/GenCov-evgidcbsmbilvcbwboysbeohrmfn/Build/Intermediates/GenCov.build/Coverage-iphonesimulator/GenCov.build/Objects-normal/i386
+Found gcov version: 4.2.1
+Scanning /Users/nirinth/Library/Developer/Xcode/DerivedData/GenCov-evgidcbsmbilvcbwboysbeohrmfn/Build/Intermediates/GenCov.build/Coverage-iphonesimulator/GenCov.build/Objects-normal/i386 for .gcda files ...
+Found 7 data files in /Users/nirinth/Library/Developer/Xcode/DerivedData/GenCov-evgidcbsmbilvcbwboysbeohrmfn/Build/Intermediates/GenCov.build/Coverage-iphonesimulator/GenCov.build/Objects-normal/i386
+Processing i386/AppDelegate.gcda
+/Users/nirinth/Library/Developer/Xcode/DerivedData/GenCov-evgidcbsmbilvcbwboysbeohrmfn/Build/Intermediates/GenCov.build/Coverage-iphonesimulator/GenCov.build/Objects-normal/i386/AppDelegate.gcno:version '404*', prefer '402*'
+/Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov/GenCov/AppDelegate.m:cannot open source file
+/Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov/GenCov/AppDelegate.h:cannot open source file
+Processing i386/DetailViewController.gcda
+/Users/nirinth/Library/Developer/Xcode/DerivedData/GenCov-evgidcbsmbilvcbwboysbeohrmfn/Build/Intermediates/GenCov.build/Coverage-iphonesimulator/GenCov.build/Objects-normal/i386/DetailViewController.gcno:version '404*', prefer '402*'
+/Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov/GenCov/DetailViewController.m:cannot open source file
+/Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov/GenCov/DetailViewController.h:cannot open source file
+Processing i386/main.gcda
+/Users/nirinth/Library/Developer/Xcode/DerivedData/GenCov-evgidcbsmbilvcbwboysbeohrmfn/Build/Intermediates/GenCov.build/Coverage-iphonesimulator/GenCov.build/Objects-normal/i386/main.gcno:version '404*', prefer '402*'
+Processing i386/MasterViewController.gcda
+/Users/nirinth/Library/Developer/Xcode/DerivedData/GenCov-evgidcbsmbilvcbwboysbeohrmfn/Build/Intermediates/GenCov.build/Coverage-iphonesimulator/GenCov.build/Objects-normal/i386/MasterViewController.gcno:version '404*', prefer '402*'
+/Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov/GenCov/MasterViewController.m:cannot open source file
+Processing i386/TCAppDelegate.gcda
+/Users/nirinth/Library/Developer/Xcode/DerivedData/GenCov-evgidcbsmbilvcbwboysbeohrmfn/Build/Intermediates/GenCov.build/Coverage-iphonesimulator/GenCov.build/Objects-normal/i386/TCAppDelegate.gcno:version '404*', prefer '402*'
+Processing i386/TCDetailViewController.gcda
+/Users/nirinth/Library/Developer/Xcode/DerivedData/GenCov-evgidcbsmbilvcbwboysbeohrmfn/Build/Intermediates/GenCov.build/Coverage-iphonesimulator/GenCov.build/Objects-normal/i386/TCDetailViewController.gcno:version '404*', prefer '402*'
+Processing i386/TCMasterViewController.gcda
+/Users/nirinth/Library/Developer/Xcode/DerivedData/GenCov-evgidcbsmbilvcbwboysbeohrmfn/Build/Intermediates/GenCov.build/Coverage-iphonesimulator/GenCov.build/Objects-normal/i386/TCMasterViewController.gcno:version '404*', prefer '402*'
+Finished .info-file creation
+Reading tracefile /Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov/Coverage/Coverage.info
+Deleted 0 files
+Writing data to /Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov/Coverage/Coverage.info
+Summary coverage rate:
+  lines......: 23.5% (42 of 179 lines)
+  functions..: 28.1% (16 of 57 functions)
+  branches...: no data found
+Reading tracefile /Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov/Coverage/Coverage.info
+Removing /Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov/GenCov/main.m
+Deleted 1 files
+Writing data to /Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov/Coverage/Coverage.info
+Summary coverage rate:
+  lines......: 24.1% (42 of 174 lines)
+  functions..: 28.6% (16 of 56 functions)
+  branches...: no data found
+Reading data file /Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov/Coverage/Coverage.info
+Found 10 entries.
+Found common filename prefix "/Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov"
+Writing .css and .png files.
+Generating output.
+genhtml: ERROR: cannot read /Users/nirinth/Catode/AppOrchard/AO_Xcodeproj/demo/GenCov/GenCov/MasterViewController.m
+Processing file GenCov/TCMasterViewController.m
+Processing file GenCov/TCDetailViewController.m
+Processing file GenCov/TCDetailViewController.h
+Processing file GenCov/MasterViewController.m

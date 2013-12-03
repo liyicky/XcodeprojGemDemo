@@ -20,14 +20,22 @@ class XcodeTestProj
     @project_path = project_path
     @project_name = project_name
     @xcproj_path  = "#{@project_path}/#{@project_name}.xcodeproj"
-
-    self.open_project
-    @class_prefix = @project.objects[0].attributes["CLASSPREFIX"]
   end
 
   def new_project
-    print "File exists" && return if File.directory?(@project_path) == true
-    FileUtils.mkdir @project_path
+    @project = Xcodeproj::Project.new(@xcproj_path)
+    @class_prefix = @project.objects[0].attributes["CLASSPREFIX"]
+    @project.new_target(:application, 'Main', :ios)
+    @project.new_target(:bundle, 'Test', :ios)
+    @main_target = @project.targets.find { |target| target.name == "Main"}
+    @test_target = @project.targets.find { |target| target.name == "Test"}
+
+    main_target_directory = "#{@project_path}/#{@main_target.name}"
+    test_target_directory = "#{@project_path}/#{@test_target.name}"
+
+    FileUtils.mkdir_p(main_target_directory) unless File.directory?(main_target_directory)
+    FileUtils.mkdir_p(test_target_directory) unless File.directory?(test_target_directory)
+
   end
 
   def open_project
@@ -45,23 +53,11 @@ class XcodeTestProj
     #Opens existing Xcodeproj
     elsif (@project_path.include? ".xcodeproj")
       @project = Xcodeproj::Project::open(@project_path)
+      @class_prefix = @project.objects[0].attributes["CLASSPREFIX"]
       @main_target = @project.targets.find { |target| target.name == @project_name}
       @test_target = @project.targets.find { |target| target.name == "#{@project_name}Tests" }
       puts "Opened #{@project_name} : #{@main_target.uuid}"
-
-    #Creates a new Xcodeproj in the root dir
-    else
-      @project = Xcodeproj::Project.new(@xcproj_path)
-      @project.new_target(:application, 'Main', :ios)
-      @project.new_target(:bundle, 'Test', :ios)
-      @main_target = @project.targets.find { |target| target.name == "Main"}
-      @test_target = @project.targets.find { |target| target.name == "Test"}
     end
-  end
-
-  def add_test_target
-    @project.new_target(:bundle, "Coverage", :ios)
-    @project.new_target(:bundle, "TestFlight", :ios)
   end
 
   def add_coverage_scheme(coverage_script=nil)
@@ -103,8 +99,7 @@ class XcodeTestProj
 
   def add_observer
     observer_path = "#{@project_path}/#{@test_target.name}/#{@test_target.name}Observer.m"
-    FileUtils.mkdir_p(File.dirname(observer_path)) unless File.directory?(File.dirname(observer_path))
-    observer = File.new(observer_path, "w+") && @test_target.add_file_references([@project.new_file(observer_path)]) unless File.exists? observer_path
+    observer      = File.new(observer_path, "w+") && @test_target.add_file_references([@project.new_file(observer_path)]) unless File.exists? observer_path
 
     File.open(observer_path, "w+") do |ln|
       ln.puts "//"
@@ -155,12 +150,11 @@ class XcodeTestProj
       end
     end
 
-    puts after_flush_number
-    puts stop_number
     application_delegate = File.open(app_delegate_path, "r+") do |file|
       file.each_line do |ln|
         stop_number+=1
         if stop_number < after_flush_number
+          #skip line
         else
           tmp_application_delegate << ln
         end
