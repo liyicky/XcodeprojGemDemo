@@ -9,7 +9,6 @@ describe "AO_Xcodeproj" do
   before  do
     @project      = XcodeTestProj.new("TestingProject_wY0kK5cNi8", "TestingProject")
     @project_path = @project.project_path
-    @root_path    = @project.root_path
   end
 
   after (:each) do
@@ -20,7 +19,22 @@ describe "AO_Xcodeproj" do
     FileUtils.rm_rf("TestingProject_wY0kK5cNi8")
   end
 
+  describe "new_project" do
+    before do
+      @project.new_project
+    end
+
+    it "should create the xcproj path" do
+      @project.xcproj_path.should == "#{@project.project_path}/#{@project.project_name}.xcodeproj"
+    end
+
+    it "should create a project directory" do
+      File.directory?(@project_path).should == true
+    end
+  end
+
   describe "open_project" do
+
 
   end
 
@@ -96,14 +110,14 @@ describe "AO_Xcodeproj" do
     it "should have a bin in the projects root directory" do
       @project.add_coverage_script
 
-      @result = Spec_helper::find_file_helper(@root_path, "/bin")
+      @result = Spec_helper::find_file_helper(@project_path, "/bin")
       File.exists?(@result).should == true
     end
 
     it "should have coverage.sh in the project's bin" do
       @project.add_coverage_script
 
-      @result = Spec_helper::find_file_helper(@root_path, "coverage.sh")
+      @result = Spec_helper::find_file_helper(@project_path, "coverage.sh")
       File.exists?(@result).should == true
     end
   end
@@ -115,12 +129,12 @@ describe "AO_Xcodeproj" do
     end
 
     it "should add an observer file to the project" do
-      @result = Spec_helper::find_file_helper(@root_path, "#{@project.test_target.name}Observer.m")
+      @result = Spec_helper::find_file_helper(@project_path, "#{@project.test_target.name}Observer.m")
       File.exists?(@result).should == true
     end
 
     it "should add a test directory if one doesn't exist" do
-      dir = "#{@root_path}/#{@project.test_target.name}"
+      dir = "#{@project_path}/#{@project.test_target.name}"
       File.directory?(dir).should == true
     end
   end
@@ -130,7 +144,7 @@ describe "AO_Xcodeproj" do
       @project.add_gcov_flush
     end
     it "should add gcov_flush() to the application's delegate" do
-      app_delegate = File.open("#{@root_path}/#{@project.main_target.name}/#{@project.class_prefix}AppDelegate").read
+      app_delegate = File.open("#{@project_path}/#{@project.main_target.name}/#{@project.class_prefix}AppDelegate").read
       if app_delegate == "- (void)applicationWillResignActive:(UIApplication *)application" then app_delegate do |ln|
         ln.readline
         ln.readline

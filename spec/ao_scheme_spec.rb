@@ -9,8 +9,6 @@ describe "AO_scheme" do
   before (:each) do
       @project      = XcodeTestProj.new("TestingProject_wY0kK5cNi8", "TestingProject")
       @project_path = @project.project_path
-      @root_path    = @project.root_path
-
       @scheme       = Xcodeproj::XCScheme.new
       @main_target  = @project.project.new_target(:application, 'Main', :ios)
       @test_target  = @project.project.new_target(:application, 'Test', :ios)
@@ -21,7 +19,6 @@ describe "AO_scheme" do
       @result       = nil
       @project      = nil
       @project_path = nil
-      @root_path    = nil
       @scheme       = nil
       @main_target  = nil
       @test_target  = nil

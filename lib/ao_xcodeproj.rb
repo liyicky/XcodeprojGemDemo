@@ -10,7 +10,7 @@ class XcodeTestProj
   attr_accessor :project
   attr_accessor :project_name
   attr_accessor :project_path
-  attr_accessor :root_path
+  attr_accessor :xcproj_path
   attr_accessor :coverage_script
   attr_accessor :main_target
   attr_accessor :test_target
@@ -19,15 +19,15 @@ class XcodeTestProj
   def initialize(project_path=nil, project_name=nil)
     @project_path = project_path
     @project_name = project_name
-
-    if @project_path[".xcodeproj"] == nil
-      @root_path  = @project_path
-    elsif @project_path[".xcodeproj"] != nil then
-      @root_path  = File.expand_path("..", @project_path)
-    end
+    @xcproj_path  = "#{@project_path}/#{@project_name}.xcodeproj"
 
     self.open_project
     @class_prefix = @project.objects[0].attributes["CLASSPREFIX"]
+  end
+
+  def new_project
+    print "File exists" && return if File.directory?(@project_path) == true
+    FileUtils.mkdir @project_path
   end
 
   def open_project
@@ -36,7 +36,7 @@ class XcodeTestProj
     if (@project_path.nil?)
       print "Enter a path for a new Xcodeproj: "
       @root_path = gets.strip.to_s()
-      @project_path = @root_path + "/#{@project_name}.xcodeproj"
+      @project_path = "#{@project_name}.xcodeproj"
       @project = Xcodeproj::Project.new(@project_path)
       @project.new_target(:application, 'Xcode', :ios)
       @main_target = @project.targets.find { |target| target.name == "Main"}
@@ -51,8 +51,7 @@ class XcodeTestProj
 
     #Creates a new Xcodeproj in the root dir
     else
-      @project_path = @project_path + "/#{@project_name}.xcodeproj"
-      @project = Xcodeproj::Project.new(@project_path)
+      @project = Xcodeproj::Project.new(@xcproj_path)
       @project.new_target(:application, 'Main', :ios)
       @project.new_target(:bundle, 'Test', :ios)
       @main_target = @project.targets.find { |target| target.name == "Main"}
@@ -93,7 +92,7 @@ class XcodeTestProj
 
   def add_coverage_script
     @project.save
-    bin_path = "#{@root_path}/bin"
+    bin_path = "#{@project_path}/bin"
     Dir.mkdir(bin_path) unless File.exist?(bin_path)
 
     input = "source /opt/boxen/env.sh\nCOV_PATH=${SRCROOT}/Coverage\nCOV_INFO=${COV_PATH}/Coverage.info\nOBJ_ARCH_PATH=${PROJECT_TEMP_DIR}/${CONFIGURATION}-iphonesimulator/${PROJECT_NAME}.build/Objects-normal/i386\n\nmkdir -p ${COV_PATH}\n/usr/bin/env lcov --capture -b ${SRCROOT} -d ${OBJ_ARCH_PATH} -o ${COV_INFO}\n/usr/bin/env lcov --remove ${COV_INFO} \"/Applications/Xcode.app/*\" -d ${OBJ_ARCH_PATH} -o ${COV_INFO}\n/usr/bin/env lcov --remove ${COV_INFO} \"main.m\" -d ${OBJ_ARCH_PATH} -o ${COV_INFO}\n\n/usr/bin/env genhtml --output-directory ${COV_PATH} ${COV_INFO}\n"
@@ -103,7 +102,7 @@ class XcodeTestProj
   end
 
   def add_observer
-    observer_path = "#{@root_path}/#{@test_target.name}/#{@test_target.name}Observer.m"
+    observer_path = "#{@project_path}/#{@test_target.name}/#{@test_target.name}Observer.m"
     FileUtils.mkdir_p(File.dirname(observer_path)) unless File.directory?(File.dirname(observer_path))
     observer = File.new(observer_path, "w+") && @test_target.add_file_references([@project.new_file(observer_path)]) unless File.exists? observer_path
 
@@ -139,7 +138,7 @@ class XcodeTestProj
     stop_number              = 0
     after_flush_number       = 0
     done_adding_flush        = false
-    app_delegate_path        = "#{@root_path}/#{@main_target.name}/#{@class_prefix}AppDelegate.m"
+    app_delegate_path        = "#{@project_path}/#{@main_target.name}/#{@class_prefix}AppDelegate.m"
     tmp_application_delegate = File.new("#{app_delegate_path}.tmp", "w+")
     application_delegate     = File.open(app_delegate_path, "r+") do |file|
       file.each_line do |ln|
