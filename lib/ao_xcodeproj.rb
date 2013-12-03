@@ -67,7 +67,7 @@ class XcodeTestProj
 
   def add_coverage_scheme(coverage_script=nil)
     @coverage_script = coverage_script
-    @coverage_script = "logfile=${SRCROOT}/bin/logfile.txt; exec > $logfile 2>&1; /bin/sh ${SRCROOT}/bin/coverage.sh" if (@coverage_script.nil?)
+    @coverage_script = "/bin/sh ${SRCROOT}/bin/coverage.sh" if (@coverage_script.nil?)
     @coverage_scheme = Xcodeproj::XCScheme.new
 
     project_settings     = {"CLANG_WARN_ENUM_CONVERSION"=>"YES", "GCC_WARN_UNUSED_VARIABLE"=>"YES", "GCC_WARN_ABOUT_RETURN_TYPE"=>"YES_ERROR", "GCC_PREPROCESSOR_DEFINITIONS"=>["DEBUG=1", "$(inherited)"], "ONLY_ACTIVE_ARCH"=>"YES", "CLANG_ENABLE_MODULES"=>"YES", "CLANG_CXX_LANGUAGE_STANDARD"=>"gnu++0x", "GCC_SYMBOLS_PRIVATE_EXTERN"=>"NO", "GCC_WARN_UNINITIALIZED_AUTOS"=>"YES", "CLANG_WARN_INT_CONVERSION"=>"YES", "CLANG_WARN_CONSTANT_CONVERSION"=>"YES", "GCC_OPTIMIZATION_LEVEL"=>"0", "GCC_C_LANGUAGE_STANDARD"=>"gnu99", "CLANG_WARN__DUPLICATE_METHOD_MATCH"=>"YES", "CLANG_WARN_EMPTY_BODY"=>"YES", "GCC_WARN_64_TO_32_BIT_CONVERSION"=>"YES", "ALWAYS_SEARCH_USER_PATHS"=>"NO", "CLANG_WARN_DIRECT_OBJC_ISA_USAGE"=>"YES_ERROR", "COPY_PHASE_STRIP"=>"NO", "CLANG_WARN_BOOL_CONVERSION"=>"YES", "CLANG_ENABLE_OBJC_ARC"=>"YES", "GCC_WARN_UNUSED_FUNCTION"=>"YES", "GCC_DYNAMIC_NO_PIC"=>"NO", "CLANG_WARN_OBJC_ROOT_CLASS"=>"YES_ERROR", "CODE_SIGN_IDENTITY[sdk=iphoneos*]"=>"iPhone Developer", "ARCHS"=>"$(ARCHS_STANDARD_INCLUDING_64_BIT)", "IPHONEOS_DEPLOYMENT_TARGET"=>"7.0", "SDKROOT"=>"iphoneos", "CLANG_CXX_LIBRARY"=>"libc++", "GCC_WARN_UNDECLARED_SELECTOR"=>"YES", "GCC_GENERATE_TEST_COVERAGE_FILES"=>"NO", "GCC_INSTRUMENT_PROGRAM_FLOW_ARCS"=>"NO"}
@@ -89,9 +89,6 @@ class XcodeTestProj
     build_coverage.launch_action
     build_coverage.profile_action
     build_coverage.save(@project_path, "Coverage")
-
-    add_observer
-    add_gcov_flush
   end
 
   def add_coverage_script
@@ -138,10 +135,10 @@ class XcodeTestProj
   end
 
   def add_gcov_flush
-    done_adding_flush        = false
     line_number              = 0
     stop_number              = 0
     after_flush_number       = 0
+    done_adding_flush        = false
     app_delegate_path        = "#{@root_path}/#{@main_target.name}/#{@class_prefix}AppDelegate.m"
     tmp_application_delegate = File.new("#{app_delegate_path}.tmp", "w+")
     application_delegate     = File.open(app_delegate_path, "r+") do |file|
@@ -152,7 +149,7 @@ class XcodeTestProj
           tmp_application_delegate.puts "{"
           tmp_application_delegate.puts "#ifdef COVERAGE //This was added for Unit Testing on #{Date.today}"
           tmp_application_delegate.puts "\t__gcov_flush();"
-          tmp_application_delegate.puts "#endif //COVERAGE"
+          tmp_application_delegate.puts "#endif          //COVERAGE"
           after_flush_number = line_number + 2
           done_adding_flush  = true
         end
