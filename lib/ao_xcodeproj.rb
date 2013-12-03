@@ -39,25 +39,11 @@ class XcodeTestProj
   end
 
   def open_project
-
-    #Creates a new Xcodeproj
-    if (@project_path.nil?)
-      print "Enter a path for a new Xcodeproj: "
-      @root_path = gets.strip.to_s()
-      @project_path = "#{@project_name}.xcodeproj"
-      @project = Xcodeproj::Project.new(@project_path)
-      @project.new_target(:application, 'Xcode', :ios)
-      @main_target = @project.targets.find { |target| target.name == "Main"}
-      @test_target = @project.targets.find { |target| target.name == "#{@project_name}Test" }
-
-    #Opens existing Xcodeproj
-    elsif (@project_path.include? ".xcodeproj")
-      @project = Xcodeproj::Project::open(@project_path)
-      @class_prefix = @project.objects[0].attributes["CLASSPREFIX"]
-      @main_target = @project.targets.find { |target| target.name == @project_name}
-      @test_target = @project.targets.find { |target| target.name == "#{@project_name}Tests" }
-      puts "Opened #{@project_name} : #{@main_target.uuid}"
-    end
+    @project = Xcodeproj::Project::open(@project_path)
+    @class_prefix = @project.objects[0].attributes["CLASSPREFIX"]
+    @main_target = @project.targets.find { |target| target.name == @project_name}
+    @test_target = @project.targets.find { |target| target.name == "#{@project_name}Tests" }
+    puts "Opened #{@project_name} : #{@main_target.uuid}"
   end
 
   def add_coverage_scheme(coverage_script=nil)
